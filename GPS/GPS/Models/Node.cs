@@ -13,5 +13,7 @@ namespace GPS.Models
         [Key]
         public int Id { get; set; }
         public string Label { get; set; }
+        public int CoordinateX { get; set; }
+        public int CoordinateY { get; set; }
     }
 }
