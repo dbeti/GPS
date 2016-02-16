@@ -35,7 +35,15 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.Label = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.CoordinateX = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.CoordinateY = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -99,18 +107,86 @@
             this.panel2.Size = new System.Drawing.Size(752, 936);
             this.panel2.TabIndex = 1;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            this.panel2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseClick);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.CoordinateY);
+            this.panel3.Controls.Add(this.label7);
+            this.panel3.Controls.Add(this.CoordinateX);
+            this.panel3.Controls.Add(this.label5);
+            this.panel3.Controls.Add(this.Label);
+            this.panel3.Controls.Add(this.label3);
+            this.panel3.Location = new System.Drawing.Point(13, 120);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(200, 100);
+            this.panel3.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(16, 10);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(33, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Label";
+            // 
+            // Label
+            // 
+            this.Label.AutoSize = true;
+            this.Label.Location = new System.Drawing.Point(87, 10);
+            this.Label.Name = "Label";
+            this.Label.Size = new System.Drawing.Size(0, 13);
+            this.Label.TabIndex = 1;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(16, 27);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 13);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "CoordinateX";
+            // 
+            // CoordinateX
+            // 
+            this.CoordinateX.AutoSize = true;
+            this.CoordinateX.Location = new System.Drawing.Point(87, 27);
+            this.CoordinateX.Name = "CoordinateX";
+            this.CoordinateX.Size = new System.Drawing.Size(0, 13);
+            this.CoordinateX.TabIndex = 3;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(16, 44);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(65, 13);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "CoordinateY";
+            // 
+            // CoordinateY
+            // 
+            this.CoordinateY.AutoSize = true;
+            this.CoordinateY.Location = new System.Drawing.Point(87, 44);
+            this.CoordinateY.Name = "CoordinateY";
+            this.CoordinateY.Size = new System.Drawing.Size(0, 13);
+            this.CoordinateY.TabIndex = 5;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 961);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -124,6 +200,13 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label CoordinateY;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label CoordinateX;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label Label;
     }
 }
 

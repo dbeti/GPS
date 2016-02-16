@@ -15,5 +15,16 @@ namespace GPS.Models
         public string Label { get; set; }
         public int CoordinateX { get; set; }
         public int CoordinateY { get; set; }
+
+        public Node()
+        {
+
+        }
+        public Node(string label, int coordinateX, int coordinateY)
+        {
+            this.Label = label;
+            this.CoordinateX = coordinateX;
+            this.CoordinateY = coordinateY;
+        }
     }
 }

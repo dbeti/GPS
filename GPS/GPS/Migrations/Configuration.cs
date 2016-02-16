@@ -15,17 +15,10 @@ namespace GPS.Migrations
         protected override void Seed(GPS.Models.GPSContext context)
         {
             //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            context.Nodes.AddOrUpdate(new Models.Node("Label1", 100, 200),
+                                      new Models.Node("Label2", 200, 300),
+                                      new Models.Node("Label3", 400, 500),
+                                      new Models.Node("Label4", 700, 600));
         }
     }
 }
