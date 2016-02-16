@@ -14,6 +14,7 @@ namespace GPS
     {
         public Form1()
         {
+            GPS.Models.GPSContext db = new GPS.Models.GPSContext();
             InitializeComponent();
         }
     }
