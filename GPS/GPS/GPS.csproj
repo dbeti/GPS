@@ -69,14 +69,24 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602171214398_AddModels.cs" />
+    <Compile Include="Migrations\201602171214398_AddModels.Designer.cs">
+      <DependentUpon>201602171214398_AddModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Arc.cs" />
+    <Compile Include="Models\Feature.cs" />
     <Compile Include="Models\GPSContext.cs" />
+    <Compile Include="Models\GraphObject.cs" />
     <Compile Include="Models\Node.cs" />
     <Compile Include="Models\ObservableListSource.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602171214398_AddModels.resx">
+      <DependentUpon>201602171214398_AddModels.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -27,7 +27,7 @@ namespace GPS
             {
                 node.CoordinateX = Convert.ToInt32(this.textBox1.Text);
                 node.CoordinateY = Convert.ToInt32(this.textBox2.Text);
-                node.Label = "Test";
+                node.Name = "Test";
                 db.Nodes.Add(node);
                 db.SaveChanges();
                 panel2.Refresh();
@@ -42,7 +42,7 @@ namespace GPS
         {
             foreach(Node node in db.Nodes)
             {
-                e.Graphics.DrawString(node.Label, new Font("Arial", 8), Brushes.Black, new PointF(node.CoordinateX, node.CoordinateY - 15));
+                e.Graphics.DrawString(node.Name, new Font("Arial", 8), Brushes.Black, new PointF(node.CoordinateX, node.CoordinateY - 15));
                 e.Graphics.DrawEllipse(Pens.Red, node.CoordinateX, node.CoordinateY, 10, 10);
             }
         }
@@ -55,7 +55,7 @@ namespace GPS
                 {
                     if (e.Y >= node.CoordinateY && e.Y <= node.CoordinateY + 10)
                     {
-                        this.Label.Text = node.Label;
+                        this.Label.Text = node.Name;
                         this.CoordinateX.Text = node.CoordinateX.ToString();
                         this.CoordinateY.Text = node.CoordinateY.ToString();
                     }

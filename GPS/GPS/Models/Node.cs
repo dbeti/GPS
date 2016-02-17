@@ -5,26 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GPS.Models
 {
-    class Node
+    [Table("Nodes")]
+    class Node : GraphObject
     {
-        [Key]
-        public int Id { get; set; }
-        public string Label { get; set; }
         public int CoordinateX { get; set; }
         public int CoordinateY { get; set; }
 
-        public Node()
-        {
+        [InverseProperty("StartNode")]
+        public virtual List<Arc> OutArcs { get; set; }
+        [InverseProperty("EndNode")]
+        public virtual List<Arc> InArcs { get; set; }
 
-        }
-        public Node(string label, int coordinateX, int coordinateY)
+        public Node() {}
+        public Node(string name, int coordinateX, int coordinateY) : base(name)
         {
-            this.Label = label;
-            this.CoordinateX = coordinateX;
-            this.CoordinateY = coordinateY;
+            CoordinateX = coordinateX;
+            CoordinateY = coordinateY;
         }
     }
 }
