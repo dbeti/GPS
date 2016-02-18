@@ -11,14 +11,14 @@ using GPS.Models;
 
 namespace GPS
 {
-    public partial class Form1 : Form
+    public partial class GPS : Form
     {
         private static GPSContext db = new GPSContext();
         private Node selected;
         private ToolStripButton[] ActionTools;
         private int selectedAction;
 
-        public Form1()
+        public GPS()
         {
             InitializeComponent();
             ActionTools = new ToolStripButton[]
@@ -69,7 +69,7 @@ namespace GPS
                     db.Arcs.Add(new Arc("TestArc", selected, node));
                     db.SaveChanges();
                     selected = null;
-                    panel2.Refresh();
+                    graphContainer.Refresh();
                 }
                 catch (FormatException formatException)
                 {
@@ -97,7 +97,7 @@ namespace GPS
                     node = clicked(e);
                     if (node == null)
                     {
-                        NodeDialog nodeDialog = new NodeDialog(e, panel2, db);
+                        NodeDialog nodeDialog = new NodeDialog(e, graphContainer, db);
                         nodeDialog.ShowDialog();
                         
                     }
@@ -111,7 +111,7 @@ namespace GPS
                     node = clicked(e);
                     if (selected != null && node != null)
                     {
-                        ArcDialog arcDialog = new ArcDialog(e, panel2, selected, node, db);
+                        ArcDialog arcDialog = new ArcDialog(e, graphContainer, selected, node, db);
                         arcDialog.Show();
                         selected = null;
                     }

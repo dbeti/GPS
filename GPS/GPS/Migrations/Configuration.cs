@@ -7,14 +7,14 @@ namespace GPS.Migrations
 
     using Models;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<GPS.Models.GPSContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<global::GPS.Models.GPSContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(GPS.Models.GPSContext context)
+        protected override void Seed(global::GPS.Models.GPSContext context)
         {
             //  This method will be called after migrating to the latest version.
             context.Features.RemoveRange(context.Features);

@@ -110,7 +110,7 @@
             // 
             // featureBindingSource
             // 
-            this.featureBindingSource.DataSource = typeof(GPS.Models.Feature);
+            this.featureBindingSource.DataSource = typeof(global::GPS.Models.Feature);
             // 
             // buttonAdd
             // 
