@@ -18,5 +18,9 @@ namespace GPS.Models
         {
             Name = name;
         }
+
+        public virtual void Draw(System.Windows.Forms.PaintEventArgs e) { }
+        public virtual System.Drawing.Point Location() { return new System.Drawing.Point(); }
+
     }
 }

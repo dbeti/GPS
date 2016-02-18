@@ -13,5 +13,6 @@ namespace GPS.Models
         public DbSet<Feature> Features { get; set; }
         public DbSet<Node> Nodes { get; set; }
         public DbSet<Arc> Arcs { get; set; }
+        public DbSet<GraphObject> GraphObjects { get; set; }
     }
 }

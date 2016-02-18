@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Windows.Forms;
+using System.Drawing;
 
 namespace GPS.Models
 {
@@ -25,6 +27,18 @@ namespace GPS.Models
         {
             CoordinateX = coordinateX;
             CoordinateY = coordinateY;
+        }
+
+        public override void Draw(PaintEventArgs e)
+        {
+            int d = Properties.Settings.Default.Diameter;
+            e.Graphics.DrawString(Name, new Font("Arial", 8), Brushes.Black, new PointF(CoordinateX, CoordinateY - 15));
+            e.Graphics.DrawEllipse(Pens.Red, CoordinateX, CoordinateY, d, d);
+        }
+
+        public override Point Location()
+        {
+            return new Point(CoordinateX, CoordinateY);
         }
     }
 }
