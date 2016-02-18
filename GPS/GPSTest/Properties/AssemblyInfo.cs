@@ -2,16 +2,14 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: InternalsVisibleTo("GPSTests")]
-[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GPS")]
+[assembly: AssemblyTitle("GPSTest")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("GPS")]
+[assembly: AssemblyProduct("GPSTest")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -22,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b96dce6b-6dbe-4aec-8960-b713305fae60")]
+[assembly: Guid("97aafc2f-e7bb-4d48-ac3e-cd51c5691a42")]
 
 // Version information for an assembly consists of the following four values:
 //

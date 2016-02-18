@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +21,19 @@ namespace GPS.Models
         [InverseProperty("EndNode")]
         public virtual List<Arc> InArcs { get; set; }
 
-        public Node() {}
-        public Node(string name, int coordinateX, int coordinateY) : base(name)
+        public Node() { }
+        public Node(string name, int coordinateX, int coordinateY) 
+            : base(name)
         {
             CoordinateX = coordinateX;
             CoordinateY = coordinateY;
+        }
+
+        [NotMapped]
+        public Point Point
+        {
+            get { return new Point(CoordinateX, CoordinateY); }
+            set { CoordinateX = value.X; CoordinateY = value.Y; }
         }
     }
 }
