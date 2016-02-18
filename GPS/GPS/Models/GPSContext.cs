@@ -7,7 +7,7 @@ using System.Data.Entity;
 
 namespace GPS.Models
 {
-    class GPSContext : DbContext
+    public class GPSContext : DbContext
     {
         public GPSContext() : base("GPSConnectionString") { }
         public DbSet<Feature> Features { get; set; }

@@ -63,6 +63,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArcDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ArcDialog.Designer.cs">
+      <DependentUpon>ArcDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,13 +86,25 @@
     <Compile Include="Models\GraphObject.cs" />
     <Compile Include="Models\Node.cs" />
     <Compile Include="Models\ObservableListSource.cs" />
+    <Compile Include="NodeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NodeDialog.Designer.cs">
+      <DependentUpon>NodeDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ArcDialog.resx">
+      <DependentUpon>ArcDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602172123217_AddModels.resx">
       <DependentUpon>201602172123217_AddModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NodeDialog.resx">
+      <DependentUpon>NodeDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -100,6 +118,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\DataSources\GPS.Models.Feature.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

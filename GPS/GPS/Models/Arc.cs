@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace GPS.Models
 {
     [Table("Arcs")]
-    class Arc : GraphObject
+    public class Arc : GraphObject
     {
         public Node StartNode { get; set; }
         public Node EndNode { get; set; }

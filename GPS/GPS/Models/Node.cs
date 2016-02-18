@@ -12,7 +12,7 @@ using System.Drawing;
 namespace GPS.Models
 {
     [Table("Nodes")]
-    class Node : GraphObject
+    public class Node : GraphObject
     {
         public int CoordinateX { get; set; }
         public int CoordinateY { get; set; }

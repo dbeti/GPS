@@ -30,10 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Name = new System.Windows.Forms.Label();
+            this.NodeName = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.NodeCoordinateY = new System.Windows.Forms.TextBox();
+            this.NodeCoordinateX = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.CoordinateY = new System.Windows.Forms.Label();
@@ -44,13 +47,10 @@
             this.LabelName = new System.Windows.Forms.Label();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolDefaultAction = new System.Windows.Forms.ToolStripButton();
             this.toolAddNode = new System.Windows.Forms.ToolStripButton();
             this.toolConnectNodes = new System.Windows.Forms.ToolStripButton();
             this.toolShowInformation = new System.Windows.Forms.ToolStripButton();
-            this.NodeCoordinateX = new System.Windows.Forms.TextBox();
-            this.NodeName = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.toolDefaultAction = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
@@ -61,7 +61,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.Name);
             this.panel1.Controls.Add(this.NodeName);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.label2);
@@ -72,6 +72,22 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(685, 100);
             this.panel1.TabIndex = 0;
+            // 
+            // Name
+            // 
+            this.Name.AutoSize = true;
+            this.Name.Location = new System.Drawing.Point(46, 6);
+            this.Name.Name = "Name";
+            this.Name.Size = new System.Drawing.Size(35, 13);
+            this.Name.TabIndex = 6;
+            this.Name.Text = "Name";
+            // 
+            // NodeName
+            // 
+            this.NodeName.Location = new System.Drawing.Point(87, 3);
+            this.NodeName.Name = "NodeName";
+            this.NodeName.Size = new System.Drawing.Size(100, 20);
+            this.NodeName.TabIndex = 5;
             // 
             // button1
             // 
@@ -107,6 +123,13 @@
             this.NodeCoordinateY.Name = "NodeCoordinateY";
             this.NodeCoordinateY.Size = new System.Drawing.Size(100, 20);
             this.NodeCoordinateY.TabIndex = 1;
+            // 
+            // NodeCoordinateX
+            // 
+            this.NodeCoordinateX.Location = new System.Drawing.Point(87, 27);
+            this.NodeCoordinateX.Name = "NodeCoordinateX";
+            this.NodeCoordinateX.Size = new System.Drawing.Size(100, 20);
+            this.NodeCoordinateX.TabIndex = 0;
             // 
             // panel2
             // 
@@ -220,6 +243,15 @@
             this.toolStrip1.Size = new System.Drawing.Size(104, 25);
             this.toolStrip1.TabIndex = 0;
             // 
+            // toolDefaultAction
+            // 
+            this.toolDefaultAction.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolDefaultAction.Image = ((System.Drawing.Image)(resources.GetObject("toolDefaultAction.Image")));
+            this.toolDefaultAction.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolDefaultAction.Name = "toolDefaultAction";
+            this.toolDefaultAction.Size = new System.Drawing.Size(23, 22);
+            this.toolDefaultAction.Text = "Default action";
+            // 
             // toolAddNode
             // 
             this.toolAddNode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -250,45 +282,12 @@
             this.toolShowInformation.Text = "toolStripButton1";
             this.toolShowInformation.ToolTipText = "Show information";
             // 
-            // NodeCoordinateX
-            // 
-            this.NodeCoordinateX.Location = new System.Drawing.Point(87, 27);
-            this.NodeCoordinateX.Name = "NodeCoordinateX";
-            this.NodeCoordinateX.Size = new System.Drawing.Size(100, 20);
-            this.NodeCoordinateX.TabIndex = 0;
-            // 
-            // NodeName
-            // 
-            this.NodeName.Location = new System.Drawing.Point(87, 3);
-            this.NodeName.Name = "NodeName";
-            this.NodeName.Size = new System.Drawing.Size(100, 20);
-            this.NodeName.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(46, 6);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Name";
-            // 
-            // toolDefaultAction
-            // 
-            this.toolDefaultAction.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolDefaultAction.Image = ((System.Drawing.Image)(resources.GetObject("toolDefaultAction.Image")));
-            this.toolDefaultAction.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolDefaultAction.Name = "toolDefaultAction";
-            this.toolDefaultAction.Size = new System.Drawing.Size(23, 22);
-            this.toolDefaultAction.Text = "Default action";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 1045);
             this.Controls.Add(this.toolStripContainer1);
-            this.Name = "Form1";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -327,7 +326,7 @@
         private System.Windows.Forms.ToolStripButton toolShowInformation;
         private System.Windows.Forms.TextBox NodeCoordinateX;
         private System.Windows.Forms.TextBox NodeName;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label Name;
         private System.Windows.Forms.ToolStripButton toolDefaultAction;
     }
 }

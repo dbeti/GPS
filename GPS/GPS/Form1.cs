@@ -13,7 +13,7 @@ namespace GPS
 {
     public partial class Form1 : Form
     {
-        private GPSContext db = new GPSContext();
+        private static GPSContext db = new GPSContext();
         private Node selected;
         private ToolStripButton[] ActionTools;
         private int selectedAction;
@@ -97,16 +97,9 @@ namespace GPS
                     node = clicked(e);
                     if (node == null)
                     {
-                        if (NodeName.Text.Length == 0)
-                        {
-                            MessageBox.Show("Please provide node name", "Warning");
-                        }
-                        else
-                        {
-                            db.Nodes.Add(new Node(NodeName.Text, e.X, e.Y));
-                            db.SaveChanges();
-                            panel2.Refresh();
-                        }
+                        NodeDialog nodeDialog = new NodeDialog(e, panel2, db);
+                        nodeDialog.ShowDialog();
+                        
                     }
                     else
                     {
@@ -118,11 +111,9 @@ namespace GPS
                     node = clicked(e);
                     if (selected != null && node != null)
                     {
-                        db.Arcs.Add(new Arc("ArcTest", selected, node));
-                        db.SaveChanges();
+                        ArcDialog arcDialog = new ArcDialog(e, panel2, selected, node, db);
+                        arcDialog.Show();
                         selected = null;
-                        panel2.Refresh();
-
                     }
                     else if (node != null)
                     {

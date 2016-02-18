@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GPS.Models
 {
-    class GraphObject
+    public class GraphObject
     {
         public int GraphObjectId { get; set; }
         public string Name { get; set; }
