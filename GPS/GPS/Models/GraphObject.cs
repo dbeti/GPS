@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GPS.Models
 {
-    class GraphObject
+    public class GraphObject
     {
         public int GraphObjectId { get; set; }
         public string Name { get; set; }
@@ -18,5 +18,9 @@ namespace GPS.Models
         {
             Name = name;
         }
+
+        public virtual void Draw(System.Windows.Forms.PaintEventArgs e) { }
+        public virtual System.Drawing.Point Location() { return new System.Drawing.Point(); }
+
     }
 }

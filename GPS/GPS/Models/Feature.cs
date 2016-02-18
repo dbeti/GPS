@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GPS.Models
 {
-    class Feature
+    public class Feature
     {
         public int Id { get; set; }
         public string Name { get; set; }

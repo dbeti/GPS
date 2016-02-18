@@ -13,12 +13,12 @@ namespace GPS.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201602171214398_AddModels"; }
+            get { return "201602172123217_AddModels"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return Resources.GetString("Source"); }
+            get { return null; }
         }
         
         string IMigrationMetadata.Target

@@ -8,14 +8,15 @@ using System.Data.Common;
 
 namespace GPS.Models
 {
-    class GPSContext : DbContext
+    public class GPSContext : DbContext
     {
         public GPSContext() : base("GPSConnectionString") { }
         public GPSContext(DbConnection connection) 
             : base(connection, true) { }
-        public virtual DbSet<Feature> Features { get; set; }
-        public virtual DbSet<FeatureType> FeatureTypes { get; set; }
-        public virtual DbSet<Node> Nodes { get; set; }
-        public virtual DbSet<Arc> Arcs { get; set; }
+        public DbSet<GraphObject> GraphObjects { get; set; }
+        public DbSet<Feature> Features { get; set; }
+        public DbSet<FeatureType> FeatureTypes { get; set; }
+        public DbSet<Node> Nodes { get; set; }
+        public DbSet<Arc> Arcs { get; set; }
     }
 }
