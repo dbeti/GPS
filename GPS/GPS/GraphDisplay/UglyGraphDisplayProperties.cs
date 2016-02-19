@@ -11,8 +11,10 @@ namespace GPS.GraphDisplay
     {
         public int NodeRadius
         {
-            get { return Properties.Settings.Default.Diameter; }
+            get { return 15; }
         }
+
+        public int ArcArrowSize { get { return 10; } }
         readonly Font labelFont = new Font("Arial", 8);
         public Font LabelFont { get { return labelFont; } }
         public Brush LabelBrush { get { return Brushes.Black; } }

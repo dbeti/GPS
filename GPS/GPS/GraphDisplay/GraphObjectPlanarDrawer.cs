@@ -48,15 +48,51 @@ namespace GPS.GraphDisplay
 
         public void VisitArc(Arc arc)
         {
+            var nr = dp.NodeRadius;
+            var ars = dp.ArcArrowSize/2;
             var startPoint = converter.ToDisplayCoord(arc.StartNode.Point);
             var endPoint = converter.ToDisplayCoord(arc.EndNode.Point);
+
             var pen = alternatePen.ContainsKey(arc) ?
                 alternatePen[arc] : dp.ArcPen;
-            graphics.DrawLine(pen, startPoint, endPoint);
+            var tmp = getOrthogonalBase(endPoint.X - startPoint.X, 
+                                        endPoint.Y - startPoint.Y);
+            var x = startPoint.X;
+            var y = startPoint.Y;
+            var c = tmp.Item1;
+            var s = tmp.Item2;
+            var d = tmp.Item3;
+            var spx = (float)Math.Round(x + nr / 2 * c);
+            var spy = (float)Math.Round(y + nr / 2 * s);
+            var epx = (float)Math.Round(x + (d - nr / 2) * c);
+            var epy = (float)Math.Round(y + (d - nr / 2) * s);
+
+            var off = Math.Sqrt(3.0) * ars;
+            
+            graphics.DrawLine(pen, spx, spy, epx, epy);
+
+            var epxc = (float)(epx - off * c);
+            var epyc = (float)(epy - off * s);
+
+            if (arc.Directed)
+            {
+                graphics.FillPolygon(pen.Brush, new PointF[] {
+                    new PointF(epx, epy),
+                    new PointF((float)(epxc - ars*s), (float)(epyc + ars*c)),
+                    new PointF((float)(epxc + ars*s), (float)(epyc - ars*c)),
+                });
+            }
             var middle = new Point((startPoint.X + endPoint.X) / 2,
                                    (startPoint.Y + endPoint.Y) / 2);
             graphics.DrawString(arc.Name, dp.LabelFont,
                                 dp.LabelBrush, middle);
+        }
+
+        private Tuple<double, double, double> getOrthogonalBase(double x, double y)
+        {
+            var d = Math.Sqrt(x * x + y * y);
+            if (d == 0) return Tuple.Create(0.0, 0.0, 0.0);
+            return Tuple.Create(x / d, y / d, d);
         }
     }
 }
