@@ -21,6 +21,7 @@ namespace GPS.Migrations
             context.FeatureTypes.RemoveRange(context.FeatureTypes);
             context.Arcs.RemoveRange(context.Arcs);
             context.Nodes.RemoveRange(context.Nodes);
+            context.GraphObjects.RemoveRange(context.GraphObjects);
 
             Node[] nodes =
             {

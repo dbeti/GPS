@@ -3,11 +3,10 @@ namespace GPS.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddFeatureType : DbMigration
+    public partial class InitialMigration : DbMigration
     {
         public override void Up()
         {
-            DropPrimaryKey("dbo.Nodes");
             CreateTable(
                 "dbo.GraphObjects",
                 c => new
@@ -59,18 +58,22 @@ namespace GPS.Migrations
                 .Index(t => t.EndNode_GraphObjectId)
                 .Index(t => t.StartNode_GraphObjectId);
             
-            AddColumn("dbo.Nodes", "GraphObjectId", c => c.Int(nullable: false));
-            AddPrimaryKey("dbo.Nodes", "GraphObjectId");
-            CreateIndex("dbo.Nodes", "GraphObjectId");
-            AddForeignKey("dbo.Nodes", "GraphObjectId", "dbo.GraphObjects", "GraphObjectId");
-            DropColumn("dbo.Nodes", "Id");
-            DropColumn("dbo.Nodes", "Label");
+            CreateTable(
+                "dbo.Nodes",
+                c => new
+                    {
+                        GraphObjectId = c.Int(nullable: false),
+                        CoordinateX = c.Int(nullable: false),
+                        CoordinateY = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.GraphObjectId)
+                .ForeignKey("dbo.GraphObjects", t => t.GraphObjectId)
+                .Index(t => t.GraphObjectId);
+            
         }
         
         public override void Down()
         {
-            AddColumn("dbo.Nodes", "Label", c => c.String(maxLength: 4000));
-            AddColumn("dbo.Nodes", "Id", c => c.Int(nullable: false, identity: true));
             DropForeignKey("dbo.Nodes", "GraphObjectId", "dbo.GraphObjects");
             DropForeignKey("dbo.Arcs", "StartNode_GraphObjectId", "dbo.Nodes");
             DropForeignKey("dbo.Arcs", "EndNode_GraphObjectId", "dbo.Nodes");
@@ -83,13 +86,11 @@ namespace GPS.Migrations
             DropIndex("dbo.Arcs", new[] { "GraphObjectId" });
             DropIndex("dbo.Features", new[] { "GraphObject_GraphObjectId" });
             DropIndex("dbo.Features", new[] { "FeatureTypeId" });
-            DropPrimaryKey("dbo.Nodes");
-            DropColumn("dbo.Nodes", "GraphObjectId");
+            DropTable("dbo.Nodes");
             DropTable("dbo.Arcs");
             DropTable("dbo.FeatureTypes");
             DropTable("dbo.Features");
             DropTable("dbo.GraphObjects");
-            AddPrimaryKey("dbo.Nodes", "Id");
         }
     }
 }

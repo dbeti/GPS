@@ -11,14 +11,14 @@ using GPS.Models;
 
 namespace GPS
 {
-    public partial class GPS : Form
+    public partial class GPSMainForm : Form
     {
         private static GPSContext db = new GPSContext();
         private Node selected;
         private ToolStripButton[] ActionTools;
         private int selectedAction;
 
-        public GPS()
+        public GPSMainForm()
         {
             InitializeComponent();
             ActionTools = new ToolStripButton[]
@@ -33,6 +33,7 @@ namespace GPS
                 btn.Click += toolAction_Click;
             }
             toolDefaultAction.Checked = true;
+            graphObjectEditor.DbContext = db;
         }
 
         private void toolAction_Click(object sender, EventArgs e)
@@ -140,6 +141,7 @@ namespace GPS
                         LabelName.Visible = true;
                         LabelCoordinateX.Visible = true;
                         LabelCoordinateY.Visible = true;
+                        graphObjectEditor.GraphObject = graphObject;
                     }
                     break;
             }

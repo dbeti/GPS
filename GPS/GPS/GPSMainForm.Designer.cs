@@ -1,6 +1,6 @@
 ﻿namespace GPS
 {
-    partial class GPS
+    partial class GPSMainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GPS));
-            this.NameLabel = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GPSMainForm));
+            GPS.Models.Node node2 = new GPS.Models.Node();
+            this.label3 = new System.Windows.Forms.Label();
             this.NodeName = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -37,46 +38,41 @@
             this.NodeCoordinateY = new System.Windows.Forms.TextBox();
             this.NodeCoordinateX = new System.Windows.Forms.TextBox();
             this.graphContainer = new System.Windows.Forms.Panel();
-            this.CoordinateY = new System.Windows.Forms.Label();
-            this.LabelCoordinateY = new System.Windows.Forms.Label();
-            this.CoordinateX = new System.Windows.Forms.Label();
-            this.LabelCoordinateX = new System.Windows.Forms.Label();
-            this.Label = new System.Windows.Forms.Label();
-            this.LabelName = new System.Windows.Forms.Label();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
+            this.mainSplit = new System.Windows.Forms.SplitContainer();
+            this.pathSelectionPanel = new System.Windows.Forms.Panel();
+            this.infoSplit = new System.Windows.Forms.SplitContainer();
+            this.infoPanel = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolDefaultAction = new System.Windows.Forms.ToolStripButton();
             this.toolAddNode = new System.Windows.Forms.ToolStripButton();
             this.toolConnectNodes = new System.Windows.Forms.ToolStripButton();
             this.toolShowInformation = new System.Windows.Forms.ToolStripButton();
-            this.mainSplit = new System.Windows.Forms.SplitContainer();
-            this.infoSplit = new System.Windows.Forms.SplitContainer();
-            this.pathSelectionPanel = new System.Windows.Forms.Panel();
-            this.infoPanel = new System.Windows.Forms.Panel();
+            this.graphObjectEditor = new GPS.GraphObjectEditor();
             this.toolStripContainer.ContentPanel.SuspendLayout();
             this.toolStripContainer.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainSplit)).BeginInit();
             this.mainSplit.Panel1.SuspendLayout();
             this.mainSplit.Panel2.SuspendLayout();
             this.mainSplit.SuspendLayout();
+            this.pathSelectionPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.infoSplit)).BeginInit();
             this.infoSplit.Panel1.SuspendLayout();
             this.infoSplit.Panel2.SuspendLayout();
             this.infoSplit.SuspendLayout();
-            this.pathSelectionPanel.SuspendLayout();
             this.infoPanel.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // NameLabel
+            // label3
             // 
-            this.NameLabel.AutoSize = true;
-            this.NameLabel.Location = new System.Drawing.Point(44, 14);
-            this.NameLabel.Name = "NameLabel";
-            this.NameLabel.Size = new System.Drawing.Size(35, 13);
-            this.NameLabel.TabIndex = 6;
-            this.NameLabel.Text = "Name";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(44, 14);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Name";
             // 
             // NodeName
             // 
@@ -140,60 +136,6 @@
             this.graphContainer.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             this.graphContainer.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseClick);
             // 
-            // CoordinateY
-            // 
-            this.CoordinateY.AutoSize = true;
-            this.CoordinateY.Location = new System.Drawing.Point(84, 44);
-            this.CoordinateY.Name = "CoordinateY";
-            this.CoordinateY.Size = new System.Drawing.Size(0, 13);
-            this.CoordinateY.TabIndex = 5;
-            // 
-            // LabelCoordinateY
-            // 
-            this.LabelCoordinateY.AutoSize = true;
-            this.LabelCoordinateY.Location = new System.Drawing.Point(13, 44);
-            this.LabelCoordinateY.Name = "LabelCoordinateY";
-            this.LabelCoordinateY.Size = new System.Drawing.Size(65, 13);
-            this.LabelCoordinateY.TabIndex = 4;
-            this.LabelCoordinateY.Text = "CoordinateY";
-            this.LabelCoordinateY.Visible = false;
-            // 
-            // CoordinateX
-            // 
-            this.CoordinateX.AutoSize = true;
-            this.CoordinateX.Location = new System.Drawing.Point(84, 27);
-            this.CoordinateX.Name = "CoordinateX";
-            this.CoordinateX.Size = new System.Drawing.Size(0, 13);
-            this.CoordinateX.TabIndex = 3;
-            // 
-            // LabelCoordinateX
-            // 
-            this.LabelCoordinateX.AutoSize = true;
-            this.LabelCoordinateX.Location = new System.Drawing.Point(13, 27);
-            this.LabelCoordinateX.Name = "LabelCoordinateX";
-            this.LabelCoordinateX.Size = new System.Drawing.Size(65, 13);
-            this.LabelCoordinateX.TabIndex = 2;
-            this.LabelCoordinateX.Text = "CoordinateX";
-            this.LabelCoordinateX.Visible = false;
-            // 
-            // Label
-            // 
-            this.Label.AutoSize = true;
-            this.Label.Location = new System.Drawing.Point(84, 10);
-            this.Label.Name = "Label";
-            this.Label.Size = new System.Drawing.Size(0, 13);
-            this.Label.TabIndex = 1;
-            // 
-            // LabelName
-            // 
-            this.LabelName.AutoSize = true;
-            this.LabelName.Location = new System.Drawing.Point(13, 10);
-            this.LabelName.Name = "LabelName";
-            this.LabelName.Size = new System.Drawing.Size(35, 13);
-            this.LabelName.TabIndex = 0;
-            this.LabelName.Text = "Name";
-            this.LabelName.Visible = false;
-            // 
             // toolStripContainer
             // 
             this.toolStripContainer.BottomToolStripPanelVisible = false;
@@ -217,6 +159,69 @@
             // 
             this.toolStripContainer.TopToolStripPanel.Controls.Add(this.toolStrip1);
             // 
+            // mainSplit
+            // 
+            this.mainSplit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainSplit.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.mainSplit.Location = new System.Drawing.Point(5, 5);
+            this.mainSplit.Name = "mainSplit";
+            // 
+            // mainSplit.Panel1
+            // 
+            this.mainSplit.Panel1.AutoScroll = true;
+            this.mainSplit.Panel1.Controls.Add(this.pathSelectionPanel);
+            // 
+            // mainSplit.Panel2
+            // 
+            this.mainSplit.Panel2.Controls.Add(this.infoSplit);
+            this.mainSplit.Size = new System.Drawing.Size(774, 526);
+            this.mainSplit.SplitterDistance = 200;
+            this.mainSplit.TabIndex = 3;
+            // 
+            // pathSelectionPanel
+            // 
+            this.pathSelectionPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pathSelectionPanel.Controls.Add(this.label3);
+            this.pathSelectionPanel.Controls.Add(this.label1);
+            this.pathSelectionPanel.Controls.Add(this.NodeName);
+            this.pathSelectionPanel.Controls.Add(this.NodeCoordinateY);
+            this.pathSelectionPanel.Controls.Add(this.button1);
+            this.pathSelectionPanel.Controls.Add(this.label2);
+            this.pathSelectionPanel.Controls.Add(this.NodeCoordinateX);
+            this.pathSelectionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pathSelectionPanel.Location = new System.Drawing.Point(0, 0);
+            this.pathSelectionPanel.Name = "pathSelectionPanel";
+            this.pathSelectionPanel.Size = new System.Drawing.Size(200, 526);
+            this.pathSelectionPanel.TabIndex = 7;
+            // 
+            // infoSplit
+            // 
+            this.infoSplit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.infoSplit.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.infoSplit.Location = new System.Drawing.Point(0, 0);
+            this.infoSplit.Name = "infoSplit";
+            // 
+            // infoSplit.Panel1
+            // 
+            this.infoSplit.Panel1.Controls.Add(this.graphContainer);
+            // 
+            // infoSplit.Panel2
+            // 
+            this.infoSplit.Panel2.Controls.Add(this.infoPanel);
+            this.infoSplit.Size = new System.Drawing.Size(570, 526);
+            this.infoSplit.SplitterDistance = 390;
+            this.infoSplit.TabIndex = 0;
+            // 
+            // infoPanel
+            // 
+            this.infoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.infoPanel.Controls.Add(this.graphObjectEditor);
+            this.infoPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.infoPanel.Location = new System.Drawing.Point(0, 0);
+            this.infoPanel.Name = "infoPanel";
+            this.infoPanel.Size = new System.Drawing.Size(176, 526);
+            this.infoPanel.TabIndex = 6;
+            // 
             // toolStrip1
             // 
             this.toolStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -229,7 +234,7 @@
             this.toolShowInformation});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(104, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(135, 25);
             this.toolStrip1.TabIndex = 0;
             // 
             // toolDefaultAction
@@ -271,101 +276,50 @@
             this.toolShowInformation.Text = "toolStripButton1";
             this.toolShowInformation.ToolTipText = "Show information";
             // 
-            // mainSplit
+            // graphObjectEditor
             // 
-            this.mainSplit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainSplit.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.mainSplit.Location = new System.Drawing.Point(5, 5);
-            this.mainSplit.Name = "mainSplit";
+            this.graphObjectEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.graphObjectEditor.Editing = false;
+            node2.CoordinateX = 0;
+            node2.CoordinateY = 0;
+            node2.Features = null;
+            node2.GraphObjectId = 0;
+            node2.InArcs = null;
+            node2.Name = null;
+            node2.OutArcs = null;
+            node2.Point = new System.Drawing.Point(0, 0);
+            this.graphObjectEditor.GraphObject = node2;
+            this.graphObjectEditor.Location = new System.Drawing.Point(0, 0);
+            this.graphObjectEditor.Name = "graphObjectEditor";
+            this.graphObjectEditor.Size = new System.Drawing.Size(174, 524);
+            this.graphObjectEditor.TabIndex = 6;
             // 
-            // mainSplit.Panel1
-            // 
-            this.mainSplit.Panel1.AutoScroll = true;
-            this.mainSplit.Panel1.Controls.Add(this.pathSelectionPanel);
-            // 
-            // mainSplit.Panel2
-            // 
-            this.mainSplit.Panel2.Controls.Add(this.infoSplit);
-            this.mainSplit.Size = new System.Drawing.Size(774, 526);
-            this.mainSplit.SplitterDistance = 200;
-            this.mainSplit.TabIndex = 3;
-            // 
-            // infoSplit
-            // 
-            this.infoSplit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.infoSplit.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.infoSplit.Location = new System.Drawing.Point(0, 0);
-            this.infoSplit.Name = "infoSplit";
-            // 
-            // infoSplit.Panel1
-            // 
-            this.infoSplit.Panel1.Controls.Add(this.graphContainer);
-            // 
-            // infoSplit.Panel2
-            // 
-            this.infoSplit.Panel2.Controls.Add(this.infoPanel);
-            this.infoSplit.Size = new System.Drawing.Size(570, 526);
-            this.infoSplit.SplitterDistance = 390;
-            this.infoSplit.TabIndex = 0;
-            // 
-            // pathSelectionPanel
-            // 
-            this.pathSelectionPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pathSelectionPanel.Controls.Add(this.NameLabel);
-            this.pathSelectionPanel.Controls.Add(this.label1);
-            this.pathSelectionPanel.Controls.Add(this.NodeName);
-            this.pathSelectionPanel.Controls.Add(this.NodeCoordinateY);
-            this.pathSelectionPanel.Controls.Add(this.button1);
-            this.pathSelectionPanel.Controls.Add(this.label2);
-            this.pathSelectionPanel.Controls.Add(this.NodeCoordinateX);
-            this.pathSelectionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pathSelectionPanel.Location = new System.Drawing.Point(0, 0);
-            this.pathSelectionPanel.Name = "pathSelectionPanel";
-            this.pathSelectionPanel.Size = new System.Drawing.Size(200, 526);
-            this.pathSelectionPanel.TabIndex = 7;
-            // 
-            // infoPanel
-            // 
-            this.infoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.infoPanel.Controls.Add(this.LabelName);
-            this.infoPanel.Controls.Add(this.CoordinateY);
-            this.infoPanel.Controls.Add(this.LabelCoordinateX);
-            this.infoPanel.Controls.Add(this.LabelCoordinateY);
-            this.infoPanel.Controls.Add(this.Label);
-            this.infoPanel.Controls.Add(this.CoordinateX);
-            this.infoPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.infoPanel.Location = new System.Drawing.Point(0, 0);
-            this.infoPanel.Name = "infoPanel";
-            this.infoPanel.Size = new System.Drawing.Size(176, 526);
-            this.infoPanel.TabIndex = 6;
-            // 
-            // GPS
+            // GPSMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.toolStripContainer);
-            this.Name = "GPS";
+            this.Name = "GPSMainForm";
             this.Text = "GPS";
             this.toolStripContainer.ContentPanel.ResumeLayout(false);
             this.toolStripContainer.TopToolStripPanel.ResumeLayout(false);
             this.toolStripContainer.TopToolStripPanel.PerformLayout();
             this.toolStripContainer.ResumeLayout(false);
             this.toolStripContainer.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.mainSplit.Panel1.ResumeLayout(false);
             this.mainSplit.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mainSplit)).EndInit();
             this.mainSplit.ResumeLayout(false);
+            this.pathSelectionPanel.ResumeLayout(false);
+            this.pathSelectionPanel.PerformLayout();
             this.infoSplit.Panel1.ResumeLayout(false);
             this.infoSplit.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.infoSplit)).EndInit();
             this.infoSplit.ResumeLayout(false);
-            this.pathSelectionPanel.ResumeLayout(false);
-            this.pathSelectionPanel.PerformLayout();
             this.infoPanel.ResumeLayout(false);
-            this.infoPanel.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -376,12 +330,6 @@
         private System.Windows.Forms.TextBox NodeCoordinateY;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel graphContainer;
-        private System.Windows.Forms.Label CoordinateY;
-        private System.Windows.Forms.Label LabelCoordinateY;
-        private System.Windows.Forms.Label CoordinateX;
-        private System.Windows.Forms.Label LabelCoordinateX;
-        private System.Windows.Forms.Label LabelName;
-        private System.Windows.Forms.Label Label;
         private System.Windows.Forms.ToolStripContainer toolStripContainer;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolAddNode;
@@ -389,12 +337,13 @@
         private System.Windows.Forms.ToolStripButton toolShowInformation;
         private System.Windows.Forms.TextBox NodeCoordinateX;
         private System.Windows.Forms.TextBox NodeName;
-        private System.Windows.Forms.Label NameLabel;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripButton toolDefaultAction;
         private System.Windows.Forms.SplitContainer mainSplit;
         private System.Windows.Forms.SplitContainer infoSplit;
         private System.Windows.Forms.Panel pathSelectionPanel;
         private System.Windows.Forms.Panel infoPanel;
+        private GPS.GraphObjectEditor graphObjectEditor;
     }
 }
 

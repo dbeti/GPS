@@ -16,7 +16,7 @@ namespace GPS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GPS());
+            Application.Run(new GPSMainForm());
         }
     }
 }

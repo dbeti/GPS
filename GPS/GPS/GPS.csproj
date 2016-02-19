@@ -85,19 +85,21 @@
     <Compile Include="ArcDialog.Designer.cs">
       <DependentUpon>ArcDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="GPS.cs">
+    <Compile Include="GPSMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GPS.Designer.cs">
-      <DependentUpon>GPS.cs</DependentUpon>
+    <Compile Include="GPSMainForm.Designer.cs">
+      <DependentUpon>GPSMainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201602172123217_AddModels.cs" />
-    <Compile Include="Migrations\201602172123217_AddModels.Designer.cs">
-      <DependentUpon>201602172123217_AddModels.cs</DependentUpon>
+    <Compile Include="Migrations\201602190017023_InitialMigration.cs" />
+    <Compile Include="Migrations\201602190017023_InitialMigration.Designer.cs">
+      <DependentUpon>201602190017023_InitialMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201602172206048_AddFeatureType.cs" />
-    <Compile Include="Migrations\201602172206048_AddFeatureType.Designer.cs">
-      <DependentUpon>201602172206048_AddFeatureType.cs</DependentUpon>
+    <Compile Include="GraphObjectEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GraphObjectEditor.Designer.cs">
+      <DependentUpon>GraphObjectEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Arc.cs" />
@@ -121,17 +123,17 @@
     <EmbeddedResource Include="ArcDialog.resx">
       <DependentUpon>ArcDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GPS.resx">
-      <DependentUpon>GPS.cs</DependentUpon>
+    <EmbeddedResource Include="GPSMainForm.resx">
+      <DependentUpon>GPSMainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602172123217_AddModels.resx">
-      <DependentUpon>201602172123217_AddModels.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602190017023_InitialMigration.resx">
+      <DependentUpon>201602190017023_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphObjectEditor.resx">
+      <DependentUpon>GraphObjectEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NodeDialog.resx">
       <DependentUpon>NodeDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602172206048_AddFeatureType.resx">
-      <DependentUpon>201602172206048_AddFeatureType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

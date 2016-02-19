@@ -18,5 +18,26 @@ namespace GPS.Models
         public DbSet<FeatureType> FeatureTypes { get; set; }
         public DbSet<Node> Nodes { get; set; }
         public DbSet<Arc> Arcs { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Arc>()
+                .HasRequired(x => x.StartNode)
+                .WithMany(x => x.OutArcs)
+                .WillCascadeOnDelete(true);
+            modelBuilder.Entity<Arc>()
+                .HasRequired(x => x.EndNode)
+                .WithMany(x => x.InArcs)
+                .WillCascadeOnDelete(true);
+            modelBuilder.Entity<Feature>()
+                .HasRequired(x => x.GraphObject)
+                .WithMany(x => x.Features)
+                .WillCascadeOnDelete(true);
+            modelBuilder.Entity<Feature>()
+                .HasRequired(x => x.FeatureType)
+                .WithMany(x => x.Features)
+                .WillCascadeOnDelete(true);
+        }
     }
 }
