@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            GPS.Models.Node node3 = new GPS.Models.Node();
+            GPS.Models.Node node1 = new GPS.Models.Node();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GPSMainForm));
             this.label3 = new System.Windows.Forms.Label();
             this.NodeName = new System.Windows.Forms.TextBox();
@@ -47,6 +47,7 @@
             this.toolShowInformation = new System.Windows.Forms.ToolStripButton();
             this.toolAddNode = new System.Windows.Forms.ToolStripButton();
             this.toolConnectNodes = new System.Windows.Forms.ToolStripButton();
+            this.toolShortestPath = new System.Windows.Forms.ToolStripButton();
             this.toolStripContainer.ContentPanel.SuspendLayout();
             this.toolStripContainer.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer.SuspendLayout();
@@ -201,7 +202,6 @@
             // 
             this.graphContainer.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.graphContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.graphContainer.DbContext = null;
             this.graphContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.graphContainer.Location = new System.Drawing.Point(0, 0);
             this.graphContainer.Name = "graphContainer";
@@ -213,15 +213,15 @@
             // 
             this.graphObjectEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.graphObjectEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            node3.CoordinateX = 0;
-            node3.CoordinateY = 0;
-            node3.Features = null;
-            node3.GraphObjectId = 0;
-            node3.InArcs = null;
-            node3.Name = null;
-            node3.OutArcs = null;
-            node3.Point = new System.Drawing.Point(0, 0);
-            this.graphObjectEditor.GraphObject = node3;
+            node1.CoordinateX = 0;
+            node1.CoordinateY = 0;
+            node1.Features = null;
+            node1.GraphObjectId = 0;
+            node1.InArcs = null;
+            node1.Name = null;
+            node1.OutArcs = null;
+            node1.Point = new System.Drawing.Point(0, 0);
+            this.graphObjectEditor.GraphObject = node1;
             this.graphObjectEditor.Location = new System.Drawing.Point(0, 0);
             this.graphObjectEditor.Name = "graphObjectEditor";
             this.graphObjectEditor.Size = new System.Drawing.Size(96, 100);
@@ -236,10 +236,11 @@
             this.graphTools.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolShowInformation,
             this.toolAddNode,
-            this.toolConnectNodes});
+            this.toolConnectNodes,
+            this.toolShortestPath});
             this.graphTools.Location = new System.Drawing.Point(3, 0);
             this.graphTools.Name = "graphTools";
-            this.graphTools.Size = new System.Drawing.Size(112, 25);
+            this.graphTools.Size = new System.Drawing.Size(135, 25);
             this.graphTools.TabIndex = 0;
             // 
             // toolShowInformation
@@ -249,7 +250,7 @@
             this.toolShowInformation.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolShowInformation.Name = "toolShowInformation";
             this.toolShowInformation.Size = new System.Drawing.Size(23, 22);
-            this.toolShowInformation.Tag = "infoTool";
+            this.toolShowInformation.Tag = "";
             this.toolShowInformation.Text = "toolStripButton1";
             this.toolShowInformation.ToolTipText = "Show information";
             this.toolShowInformation.Click += new System.EventHandler(this.toolAction_Click);
@@ -261,7 +262,7 @@
             this.toolAddNode.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolAddNode.Name = "toolAddNode";
             this.toolAddNode.Size = new System.Drawing.Size(23, 22);
-            this.toolAddNode.Tag = "nodeTool";
+            this.toolAddNode.Tag = "";
             this.toolAddNode.Text = "toolStripButton1";
             this.toolAddNode.ToolTipText = "Add node";
             this.toolAddNode.Click += new System.EventHandler(this.toolAction_Click);
@@ -273,10 +274,21 @@
             this.toolConnectNodes.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolConnectNodes.Name = "toolConnectNodes";
             this.toolConnectNodes.Size = new System.Drawing.Size(23, 22);
-            this.toolConnectNodes.Tag = "arcTool";
+            this.toolConnectNodes.Tag = "";
             this.toolConnectNodes.Text = "toolStripButton2";
             this.toolConnectNodes.ToolTipText = "Connect nodes";
             this.toolConnectNodes.Click += new System.EventHandler(this.toolAction_Click);
+            // 
+            // toolShortestPath
+            // 
+            this.toolShortestPath.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolShortestPath.Image = ((System.Drawing.Image)(resources.GetObject("toolShortestPath.Image")));
+            this.toolShortestPath.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolShortestPath.Name = "toolShortestPath";
+            this.toolShortestPath.Size = new System.Drawing.Size(23, 22);
+            this.toolShortestPath.Text = "toolStripButton1";
+            this.toolShortestPath.ToolTipText = "Calculate shortest path";
+            this.toolShortestPath.Click += new System.EventHandler(this.toolAction_Click);
             // 
             // GPSMainForm
             // 
@@ -325,6 +337,7 @@
         private System.Windows.Forms.Panel pathSelectionPanel;
         private GraphObjectEditor graphObjectEditor;
         private GraphDisplay.PlanarGraphDrawer graphContainer;
+        private System.Windows.Forms.ToolStripButton toolShortestPath;
     }
 }
 

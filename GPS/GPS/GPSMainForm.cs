@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GPS.Models;
 using GPS.GraphDisplay;
+using GPS.PathFinders;
 
 namespace GPS
 {
@@ -34,6 +35,7 @@ namespace GPS
             toolShowInformation.Tag = new InfoTool(this);
             toolAddNode.Tag = new NodeTool(this);
             toolConnectNodes.Tag = new ArcTool(this);
+            toolShortestPath.Tag = new ShortestPathTool(this);
 
             toolShowInformation.Checked = true;
             currentTool = toolShowInformation.Tag as ITool;
@@ -156,41 +158,39 @@ namespace GPS
                 }
             }
 
-            public void Cleanup() { }
+            public void Cleanup()
+            {
+                parent.graphObjectEditor.Editing = false;
+                parent.infoSplit.Panel2Collapsed = true;
+            }
         }
-
-        protected class ArcTool : ITool
+        
+        protected abstract class TwoNodeSelectTool : ITool
         {
-            private GPSMainForm parent;
-            private Node startNode = null;
-            private Node endNode = null;
+            protected GPSMainForm parent;
+            protected Node firstNode = null;
+            protected Node secondNode = null;
 
-            public ArcTool(GPSMainForm parent)
+            public TwoNodeSelectTool(GPSMainForm parent)
             {
                 this.parent = parent;
             }
 
-            public void ProcessGraphClick(GraphMouseEventArgs args)
+            public virtual void ProcessGraphClick(GraphMouseEventArgs args)
             {
                 if (args.GraphObject is Node)
                 {
-                    if (startNode == null || endNode != null)
+                    if (firstNode == null || secondNode != null)
                     {
                         Cleanup();
-                        startNode = args.GraphObject as Node;
-                        parent.graphContainer.HighlightAsSelected(startNode);
+                        firstNode = args.GraphObject as Node;
+                        parent.graphContainer.HighlightAsSelected(firstNode);
                     }
                     else
                     {
-                        endNode = args.GraphObject as Node;
-                        parent.graphObjectEditor.GraphObject = new Arc()
-                        {
-                            StartNode = startNode,
-                            EndNode = endNode
-                        };
-                        parent.graphObjectEditor.Editing = true;
-                        parent.infoSplit.Panel2Collapsed = false;
-                        parent.graphContainer.HighlightAsSelected(endNode);
+                        secondNode = args.GraphObject as Node;
+                        parent.graphContainer.HighlightAsSelected(secondNode);
+                        onTwoNodesSelected(firstNode, secondNode);
                     }
                 }
                 else
@@ -199,14 +199,80 @@ namespace GPS
                 }
             }
 
-            public void Cleanup()
+            public virtual void Cleanup()
             {
-                parent.graphContainer.RemoveHighlight(startNode);
-                parent.graphContainer.RemoveHighlight(endNode);
-                startNode = null;
-                endNode = null;
+                parent.graphContainer.RemoveHighlight(firstNode);
+                parent.graphContainer.RemoveHighlight(secondNode);
+                firstNode = null;
+                secondNode = null;
+            }
+
+            protected abstract void onTwoNodesSelected(
+                Node firstNode,
+                Node secondNode);
+        }
+
+        protected class ArcTool : TwoNodeSelectTool
+        {
+
+            public ArcTool(GPSMainForm parent) : base(parent) { }
+
+            protected override void onTwoNodesSelected(
+                Node firstNode,
+                Node secondNode)
+            {
+                parent.graphObjectEditor.GraphObject = new Arc()
+                {
+                    StartNode = firstNode,
+                    EndNode = secondNode
+                };
+                parent.graphObjectEditor.Editing = true;
+                parent.infoSplit.Panel2Collapsed = false;
+            }
+
+            public override void Cleanup()
+            {
+                base.Cleanup();
                 parent.graphObjectEditor.Editing = false;
                 parent.infoSplit.Panel2Collapsed = true;
+            }
+        }
+
+        protected class ShortestPathTool : TwoNodeSelectTool
+        {
+            private IPathFinder pathFinder;
+            private IList<GraphObject> path;
+
+            public ShortestPathTool(GPSMainForm parent) : base(parent)
+            {
+                pathFinder = new AStarPathFinder();
+            }
+
+            protected override void onTwoNodesSelected(
+                Node firstNode,
+                Node secondNode)
+            {
+                path = pathFinder.FindPath(firstNode, secondNode, 
+                    Enumerable.Empty<FeatureType>());
+                if (path != null)
+                {
+                    foreach (var obj in path)
+                    {
+                        parent.graphContainer.HighlightAsSelected(obj);
+                    }
+                }
+            }
+
+            public override void Cleanup()
+            {
+                base.Cleanup();
+                if (path != null)
+                {
+                    foreach (var obj in path)
+                    {
+                        parent.graphContainer.RemoveHighlight(obj);
+                    }
+                }
             }
         }
     }
