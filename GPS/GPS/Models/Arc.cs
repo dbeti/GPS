@@ -25,21 +25,11 @@ namespace GPS.Models
             Directed = directed;
         }
 
-        public override void Draw(PaintEventArgs e)
+        public override void Accept(IGraphObjectVisitor visitor)
         {
-            int d = Properties.Settings.Default.Diameter;
-
-            e.Graphics.DrawLine(System.Drawing.Pens.Red, 
-                                StartNode.CoordinateX + d/2, 
-                                StartNode.CoordinateY + d/2, 
-                                EndNode.CoordinateX + d/2, 
-                                EndNode.CoordinateY + d/2);
-
-            e.Graphics.DrawString(Name, 
-                                  new Font("Arial", 8), 
-                                  Brushes.Black, 
-                                  new PointF((StartNode.CoordinateX + EndNode.CoordinateX)/2, (StartNode.CoordinateY + EndNode.CoordinateY)/2));
+            visitor.VisitArc(this);
         }
+
         public override Point Location()
         {
             return new Point((int)((StartNode.CoordinateX + EndNode.CoordinateX) / 2), (int)((StartNode.CoordinateY + EndNode.CoordinateY) / 2));

@@ -30,11 +30,9 @@ namespace GPS.Models
             CoordinateY = coordinateY;
         }
 
-        public override void Draw(PaintEventArgs e)
+        public override void Accept(IGraphObjectVisitor visitor)
         {
-            int d = Properties.Settings.Default.Diameter;
-            e.Graphics.DrawString(Name, new Font("Arial", 8), Brushes.Black, new PointF(CoordinateX, CoordinateY - 15));
-            e.Graphics.DrawEllipse(Pens.Red, CoordinateX, CoordinateY, d, d);
+            visitor.VisitNode(this);
         }
 
         public override Point Location()

@@ -54,9 +54,10 @@ namespace GPS.GraphDisplay
             base.OnPaint(e);
             if (DbContext != null)
             {
+                var drawer = new GraphObjectPlanarDrawer(e.Graphics);
                 foreach (GraphObject graphObject in DbContext.GraphObjects.ToList())
                 {
-                    graphObject.Draw(e);
+                    graphObject.Accept(drawer);
                 }
             }
         }

@@ -81,7 +81,8 @@ namespace GPS
 
         }
 
-        private void graphContainer_GraphMouseClick(object sender, GraphDisplay.PlanarGraphDrawer.GraphMouseEventArgs e)
+        private void graphContainer_GraphMouseClick(object sender, 
+            GraphDisplay.PlanarGraphDrawer.GraphMouseEventArgs e)
         {
             switch (selectedAction)
             {

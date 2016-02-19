@@ -113,6 +113,7 @@
     <Compile Include="Models\FeatureType.cs" />
     <Compile Include="Models\GPSContext.cs" />
     <Compile Include="Models\GraphObject.cs" />
+    <Compile Include="Models\IGraphObjectVisitor.cs" />
     <Compile Include="Models\Node.cs" />
     <Compile Include="Models\ObservableListSource.cs" />
     <Compile Include="NodeDialog.cs">
@@ -123,6 +124,7 @@
     </Compile>
     <Compile Include="PathFinders\AStarPathFinder.cs" />
     <Compile Include="PathFinders\Data.cs" />
+    <Compile Include="GraphDisplay\GraphObjectPlanarDrawer.cs" />
     <Compile Include="PathFinders\IPathFinder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -131,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GPSMainForm.resx">
       <DependentUpon>GPSMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphDisplay\PlanarGraphDrawer.resx">
+      <DependentUpon>PlanarGraphDrawer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602190017023_InitialMigration.resx">
       <DependentUpon>201602190017023_InitialMigration.cs</DependentUpon>

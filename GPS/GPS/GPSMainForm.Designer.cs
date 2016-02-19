@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            GPS.Models.Node node1 = new GPS.Models.Node();
+            GPS.Models.Node node2 = new GPS.Models.Node();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GPSMainForm));
             this.label3 = new System.Windows.Forms.Label();
             this.NodeName = new System.Windows.Forms.TextBox();
@@ -200,7 +200,6 @@
             // 
             // graphContainer
             // 
-            this.graphContainer.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.graphContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.graphContainer.DbContext = null;
             this.graphContainer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -214,15 +213,15 @@
             // 
             this.graphObjectEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.graphObjectEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            node1.CoordinateX = 0;
-            node1.CoordinateY = 0;
-            node1.Features = null;
-            node1.GraphObjectId = 0;
-            node1.InArcs = null;
-            node1.Name = null;
-            node1.OutArcs = null;
-            node1.Point = new System.Drawing.Point(0, 0);
-            this.graphObjectEditor.GraphObject = node1;
+            node2.CoordinateX = 0;
+            node2.CoordinateY = 0;
+            node2.Features = null;
+            node2.GraphObjectId = 0;
+            node2.InArcs = null;
+            node2.Name = null;
+            node2.OutArcs = null;
+            node2.Point = new System.Drawing.Point(0, 0);
+            this.graphObjectEditor.GraphObject = node2;
             this.graphObjectEditor.Location = new System.Drawing.Point(0, 0);
             this.graphObjectEditor.Name = "graphObjectEditor";
             this.graphObjectEditor.Size = new System.Drawing.Size(96, 100);
