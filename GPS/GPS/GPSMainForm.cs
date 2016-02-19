@@ -254,25 +254,14 @@ namespace GPS
             {
                 path = pathFinder.FindPath(firstNode, secondNode, 
                     Enumerable.Empty<FeatureType>());
-                if (path != null)
-                {
-                    foreach (var obj in path)
-                    {
-                        parent.graphContainer.HighlightAsSelected(obj);
-                    }
-                }
+                parent.graphContainer.HighlightPath(path);
             }
 
             public override void Cleanup()
             {
                 base.Cleanup();
-                if (path != null)
-                {
-                    foreach (var obj in path)
-                    {
-                        parent.graphContainer.RemoveHighlight(obj);
-                    }
-                }
+                parent.graphContainer.HighlightPath(null);
+                path = null;
             }
         }
     }

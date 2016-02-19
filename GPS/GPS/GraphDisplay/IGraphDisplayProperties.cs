@@ -16,5 +16,6 @@ namespace GPS.GraphDisplay
         Pen ArcPen { get; }
         Color Background { get; }
         Pen SelectedPen { get; }
+        Pen PathPen { get; }
     }
 }

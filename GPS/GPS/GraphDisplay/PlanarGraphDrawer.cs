@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,8 @@ namespace GPS.GraphDisplay
 
         private IDictionary<GraphObject, Pen> specialHighlight
             = new Dictionary<GraphObject, Pen>();
+
+        private GraphObject[] higlightedPath = null;
 
         public GPSContext DbContext;
          
@@ -51,6 +54,29 @@ namespace GPS.GraphDisplay
             }
         }
 
+        public void HighlightPath(IEnumerable<GraphObject> path)
+        {
+            if (higlightedPath != null)
+            {
+                foreach (var obj in higlightedPath)
+                {
+                    if (specialHighlight.ContainsKey(obj))
+                    {
+                        specialHighlight.Remove(obj);
+                    }
+                }
+            }
+            higlightedPath = path != null ? path.ToArray() : null;
+            if (higlightedPath != null)
+            {
+                foreach (var obj in higlightedPath)
+                {
+                    specialHighlight[obj] = displayProps.PathPen;
+                }
+            }
+            Refresh();
+        }
+
         protected virtual void OnGraphMouseClick(GraphMouseEventArgs args)
         {
             var handler = GraphMouseClick;
@@ -74,6 +100,7 @@ namespace GPS.GraphDisplay
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             if (DbContext != null)
             {
                 var drawer = new GraphObjectPlanarDrawer(
