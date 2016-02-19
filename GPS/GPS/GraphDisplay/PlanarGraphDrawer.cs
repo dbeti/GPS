@@ -14,6 +14,10 @@ namespace GPS.GraphDisplay
 {
     public partial class PlanarGraphDrawer : UserControl
     {
+        private ICoordinateConverter coordConverter =
+            new SimpleCoordinateConverter();
+        private IGraphDisplayProperties displayProps =
+            new UglyGraphDisplayProperties();
 
         public class GraphMouseEventArgs : MouseEventArgs
         {
@@ -39,7 +43,11 @@ namespace GPS.GraphDisplay
         protected override void OnMouseClick(MouseEventArgs e)
         {
             base.OnMouseClick(e);
-            OnGraphMouseClick(new GraphMouseEventArgs(e, objectClicked(e)));
+            var dbPoint = coordConverter.ToDbCoord(new Point(e.X, e.Y));
+            e = new MouseEventArgs(e.Button, e.Clicks, dbPoint.X, 
+                                   dbPoint.Y, e.Delta);
+            OnGraphMouseClick(new GraphMouseEventArgs(
+                e, objectClicked(dbPoint)));
         }
 
         public GPSContext DbContext { get; set; }
@@ -47,6 +55,7 @@ namespace GPS.GraphDisplay
         public PlanarGraphDrawer()
         {
             InitializeComponent();
+            BackColor = displayProps.Background;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -54,22 +63,23 @@ namespace GPS.GraphDisplay
             base.OnPaint(e);
             if (DbContext != null)
             {
-                var drawer = new GraphObjectPlanarDrawer(e.Graphics);
-                foreach (GraphObject graphObject in DbContext.GraphObjects.ToList())
+                var drawer = new GraphObjectPlanarDrawer(
+                    e.Graphics, coordConverter, displayProps);
+                foreach (var graphObject in DbContext.GraphObjects.ToList())
                 {
                     graphObject.Accept(drawer);
                 }
             }
         }
 
-        private GraphObject objectClicked(MouseEventArgs e)
+        private GraphObject objectClicked(Point p)
         {
             foreach (var graphObject in DbContext.GraphObjects.ToList())
             {
                 Point location = graphObject.Location();
-                if (e.X >= location.X && e.X <= location.X + 10)
+                if (p.X >= location.X - 5 && p.X <= location.X + 5)
                 {
-                    if (e.Y >= location.Y && e.Y <= location.Y + 10)
+                    if (p.Y >= location.Y - 5 && p.Y <= location.Y + 5)
                     {
                         return graphObject;
                     }

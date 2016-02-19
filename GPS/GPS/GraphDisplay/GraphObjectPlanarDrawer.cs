@@ -12,10 +12,17 @@ namespace GPS.GraphDisplay
     class GraphObjectPlanarDrawer : IGraphObjectVisitor
     {
         private Graphics graphics;
+        private ICoordinateConverter converter;
+        private IGraphDisplayProperties dp;
 
-        public GraphObjectPlanarDrawer(Graphics graphics)
+        public GraphObjectPlanarDrawer(
+            Graphics graphics,
+            ICoordinateConverter converter,
+            IGraphDisplayProperties displayProps)
         {
             this.graphics = graphics;
+            this.converter = converter;
+            dp = displayProps;
         }
 
         public void VisitGraphObject(GraphObject graphObject)
@@ -25,25 +32,23 @@ namespace GPS.GraphDisplay
 
         public void VisitNode(Node node)
         {
-            int d = Properties.Settings.Default.Diameter;
-            graphics.DrawString(node.Name, new Font("Arial", 8), Brushes.Black, 
-                                new PointF(node.CoordinateX, node.CoordinateY - 15));
-            graphics.DrawEllipse(Pens.Red, node.CoordinateX, node.CoordinateY, d, d);
+            int d = dp.NodeRadius;
+            var p = converter.ToDisplayCoord(
+                new Point(node.CoordinateX, node.CoordinateY));
+            graphics.DrawString(node.Name, dp.LabelFont,
+                                dp.LabelBrush, p.X, p.Y - 15);
+            graphics.FillEllipse(dp.NodeBrush, p.X - d/2, p.Y - d/2, d, d);
         }
 
         public void VisitArc(Arc arc)
         {
-            int d = Properties.Settings.Default.Diameter;
-            graphics.DrawLine(Pens.Red,
-                              arc.StartNode.CoordinateX + d / 2,
-                              arc.StartNode.CoordinateY + d / 2,
-                              arc.EndNode.CoordinateX + d / 2,
-                              arc.EndNode.CoordinateY + d / 2);
-            var p = new PointF(
-                (arc.StartNode.CoordinateX + arc.EndNode.CoordinateX) / 2,
-                (arc.StartNode.CoordinateY + arc.EndNode.CoordinateY) / 2);
-            graphics.DrawString(arc.Name, new Font("Arial", 8),
-                                Brushes.Black, p);
+            var startPoint = converter.ToDisplayCoord(arc.StartNode.Point);
+            var endPoint = converter.ToDisplayCoord(arc.EndNode.Point);
+            graphics.DrawLine(dp.ArcPen, startPoint, endPoint);
+            var middle = new Point((startPoint.X + endPoint.X) / 2,
+                                   (startPoint.Y + endPoint.Y) / 2);
+            graphics.DrawString(arc.Name, dp.LabelFont,
+                                dp.LabelBrush, middle);
         }
     }
 }
