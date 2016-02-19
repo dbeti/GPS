@@ -19,7 +19,37 @@ namespace GPS.GraphDisplay
         private IGraphDisplayProperties displayProps =
             new UglyGraphDisplayProperties();
 
+        private IDictionary<GraphObject, Pen> specialHighlight
+            = new Dictionary<GraphObject, Pen>();
+
+        public GPSContext DbContext;
+         
         public event EventHandler<GraphMouseEventArgs> GraphMouseClick;
+
+        public PlanarGraphDrawer()
+        {
+            InitializeComponent();
+            BackColor = displayProps.Background;
+        }
+
+        public void HighlightAsSelected(GraphObject graphObject)
+        {
+            if (graphObject != null)
+            {
+                specialHighlight[graphObject] = displayProps.SelectedPen;
+                Refresh();
+            }
+        }
+
+        public void RemoveHighlight(GraphObject graphObject)
+        {
+            if (graphObject != null && 
+                specialHighlight.ContainsKey(graphObject))
+            {
+                specialHighlight.Remove(graphObject);
+                Refresh();
+            }
+        }
 
         protected virtual void OnGraphMouseClick(GraphMouseEventArgs args)
         {
@@ -40,21 +70,15 @@ namespace GPS.GraphDisplay
                 e, objectClicked(dbPoint)));
         }
 
-        public GPSContext DbContext { get; set; }
-
-        public PlanarGraphDrawer()
-        {
-            InitializeComponent();
-            BackColor = displayProps.Background;
-        }
-
+        
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
             if (DbContext != null)
             {
                 var drawer = new GraphObjectPlanarDrawer(
-                    e.Graphics, coordConverter, displayProps);
+                    e.Graphics, coordConverter, displayProps,
+                    specialHighlight);
                 foreach (var graphObject in DbContext.GraphObjects.ToList())
                 {
                     graphObject.Accept(drawer);

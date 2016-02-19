@@ -22,5 +22,6 @@ namespace GPS.GraphDisplay
         {
             get { return SystemColors.ControlLightLight; }
         }
+        public Pen SelectedPen { get { return Pens.Red; } }
     }
 }

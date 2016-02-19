@@ -15,5 +15,6 @@ namespace GPS.GraphDisplay
         Brush NodeBrush { get; }
         Pen ArcPen { get; }
         Color Background { get; }
+        Pen SelectedPen { get; }
     }
 }

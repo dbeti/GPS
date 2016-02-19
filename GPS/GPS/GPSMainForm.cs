@@ -17,6 +17,7 @@ namespace GPS
         public interface ITool
         {
             void ProcessGraphClick(GraphMouseEventArgs args);
+            void Cleanup();
         }
 
         private static GPSContext db = new GPSContext();
@@ -41,6 +42,7 @@ namespace GPS
         private void toolAction_Click(object sender, EventArgs e)
         {
             var btn = sender as ToolStripButton;
+            currentTool.Cleanup();
             currentTool = btn.Tag as ITool;
             foreach(var tool in graphTools.Items)
             {
@@ -98,6 +100,7 @@ namespace GPS
         protected class InfoTool : ITool
         {
             private GPSMainForm parent;
+            private GraphObject selected = null;
 
             public InfoTool(GPSMainForm parent)
             {
@@ -106,15 +109,24 @@ namespace GPS
 
             public void ProcessGraphClick(GraphMouseEventArgs args)
             {
-                if (args.GraphObject != null)
+                parent.graphContainer.RemoveHighlight(selected);
+                selected = args.GraphObject;
+                if (selected != null)
                 {
                     parent.infoSplit.Panel2Collapsed = false;
-                    parent.graphObjectEditor.GraphObject = args.GraphObject;
+                    parent.graphObjectEditor.GraphObject = selected;
+                    parent.graphContainer.HighlightAsSelected(selected);
                 }
                 else
                 {
                     parent.infoSplit.Panel2Collapsed = true;
                 }
+            }
+
+            public void Cleanup()
+            {
+                parent.graphContainer.RemoveHighlight(selected);
+                selected = null;
             }
         }
 
@@ -143,12 +155,15 @@ namespace GPS
                     parent.selected = args.GraphObject as Node;
                 }
             }
+
+            public void Cleanup() { }
         }
 
         protected class ArcTool : ITool
         {
             private GPSMainForm parent;
             private Node startNode = null;
+            private Node endNode = null;
 
             public ArcTool(GPSMainForm parent)
             {
@@ -159,26 +174,39 @@ namespace GPS
             {
                 if (args.GraphObject is Node)
                 {
-                    if (startNode != null)
+                    if (startNode == null || endNode != null)
                     {
-                        parent.graphObjectEditor.GraphObject = new Arc()
-                        {
-                            StartNode = startNode,
-                            EndNode = args.GraphObject as Node
-                        };
-                        parent.graphObjectEditor.Editing = true;
-                        parent.infoSplit.Panel2Collapsed = false;
-                        startNode = null;
+                        Cleanup();
+                        startNode = args.GraphObject as Node;
+                        parent.graphContainer.HighlightAsSelected(startNode);
                     }
                     else
                     {
-                        startNode = args.GraphObject as Node;
+                        endNode = args.GraphObject as Node;
+                        parent.graphObjectEditor.GraphObject = new Arc()
+                        {
+                            StartNode = startNode,
+                            EndNode = endNode
+                        };
+                        parent.graphObjectEditor.Editing = true;
+                        parent.infoSplit.Panel2Collapsed = false;
+                        parent.graphContainer.HighlightAsSelected(endNode);
                     }
                 }
                 else
                 {
-                    startNode = null;
+                    Cleanup();
                 }
+            }
+
+            public void Cleanup()
+            {
+                parent.graphContainer.RemoveHighlight(startNode);
+                parent.graphContainer.RemoveHighlight(endNode);
+                startNode = null;
+                endNode = null;
+                parent.graphObjectEditor.Editing = false;
+                parent.infoSplit.Panel2Collapsed = true;
             }
         }
     }
