@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            GPS.Models.Node node2 = new GPS.Models.Node();
+            GPS.Models.Node node3 = new GPS.Models.Node();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GPSMainForm));
             this.label3 = new System.Windows.Forms.Label();
             this.NodeName = new System.Windows.Forms.TextBox();
@@ -43,11 +43,10 @@
             this.infoSplit = new System.Windows.Forms.SplitContainer();
             this.graphContainer = new GPS.GraphDisplay.PlanarGraphDrawer();
             this.graphObjectEditor = new GPS.GraphObjectEditor();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolDefaultAction = new System.Windows.Forms.ToolStripButton();
+            this.graphTools = new System.Windows.Forms.ToolStrip();
+            this.toolShowInformation = new System.Windows.Forms.ToolStripButton();
             this.toolAddNode = new System.Windows.Forms.ToolStripButton();
             this.toolConnectNodes = new System.Windows.Forms.ToolStripButton();
-            this.toolShowInformation = new System.Windows.Forms.ToolStripButton();
             this.toolStripContainer.ContentPanel.SuspendLayout();
             this.toolStripContainer.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer.SuspendLayout();
@@ -60,7 +59,7 @@
             this.infoSplit.Panel1.SuspendLayout();
             this.infoSplit.Panel2.SuspendLayout();
             this.infoSplit.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.graphTools.SuspendLayout();
             this.SuspendLayout();
             // 
             // label3
@@ -142,7 +141,7 @@
             // 
             // toolStripContainer.TopToolStripPanel
             // 
-            this.toolStripContainer.TopToolStripPanel.Controls.Add(this.toolStrip1);
+            this.toolStripContainer.TopToolStripPanel.Controls.Add(this.graphTools);
             // 
             // mainSplit
             // 
@@ -200,6 +199,7 @@
             // 
             // graphContainer
             // 
+            this.graphContainer.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.graphContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.graphContainer.DbContext = null;
             this.graphContainer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -207,70 +207,40 @@
             this.graphContainer.Name = "graphContainer";
             this.graphContainer.Size = new System.Drawing.Size(570, 526);
             this.graphContainer.TabIndex = 0;
-            this.graphContainer.GraphMouseClick += new System.EventHandler<GPS.GraphDisplay.PlanarGraphDrawer.GraphMouseEventArgs>(this.graphContainer_GraphMouseClick);
+            this.graphContainer.GraphMouseClick += new System.EventHandler<GPS.GraphDisplay.GraphMouseEventArgs>(this.graphContainer_GraphMouseClick);
             // 
             // graphObjectEditor
             // 
             this.graphObjectEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.graphObjectEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            node2.CoordinateX = 0;
-            node2.CoordinateY = 0;
-            node2.Features = null;
-            node2.GraphObjectId = 0;
-            node2.InArcs = null;
-            node2.Name = null;
-            node2.OutArcs = null;
-            node2.Point = new System.Drawing.Point(0, 0);
-            this.graphObjectEditor.GraphObject = node2;
+            node3.CoordinateX = 0;
+            node3.CoordinateY = 0;
+            node3.Features = null;
+            node3.GraphObjectId = 0;
+            node3.InArcs = null;
+            node3.Name = null;
+            node3.OutArcs = null;
+            node3.Point = new System.Drawing.Point(0, 0);
+            this.graphObjectEditor.GraphObject = node3;
             this.graphObjectEditor.Location = new System.Drawing.Point(0, 0);
             this.graphObjectEditor.Name = "graphObjectEditor";
             this.graphObjectEditor.Size = new System.Drawing.Size(96, 100);
             this.graphObjectEditor.TabIndex = 6;
             this.graphObjectEditor.GraphObjectUpdated += new System.EventHandler<GPS.GraphObjectEditor.GraphObjectEventArgs>(this.graphObjectEditor_GraphObjectUpdated);
             // 
-            // toolStrip1
+            // graphTools
             // 
-            this.toolStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.graphTools.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolDefaultAction,
+            this.graphTools.Dock = System.Windows.Forms.DockStyle.None;
+            this.graphTools.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolShowInformation,
             this.toolAddNode,
-            this.toolConnectNodes,
-            this.toolShowInformation});
-            this.toolStrip1.Location = new System.Drawing.Point(3, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(104, 25);
-            this.toolStrip1.TabIndex = 0;
-            // 
-            // toolDefaultAction
-            // 
-            this.toolDefaultAction.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolDefaultAction.Image = ((System.Drawing.Image)(resources.GetObject("toolDefaultAction.Image")));
-            this.toolDefaultAction.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolDefaultAction.Name = "toolDefaultAction";
-            this.toolDefaultAction.Size = new System.Drawing.Size(23, 22);
-            this.toolDefaultAction.Text = "Default action";
-            // 
-            // toolAddNode
-            // 
-            this.toolAddNode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolAddNode.Image = ((System.Drawing.Image)(resources.GetObject("toolAddNode.Image")));
-            this.toolAddNode.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolAddNode.Name = "toolAddNode";
-            this.toolAddNode.Size = new System.Drawing.Size(23, 22);
-            this.toolAddNode.Text = "toolStripButton1";
-            this.toolAddNode.ToolTipText = "Add node";
-            // 
-            // toolConnectNodes
-            // 
-            this.toolConnectNodes.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolConnectNodes.Image = ((System.Drawing.Image)(resources.GetObject("toolConnectNodes.Image")));
-            this.toolConnectNodes.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolConnectNodes.Name = "toolConnectNodes";
-            this.toolConnectNodes.Size = new System.Drawing.Size(23, 22);
-            this.toolConnectNodes.Text = "toolStripButton2";
-            this.toolConnectNodes.ToolTipText = "Connect nodes";
+            this.toolConnectNodes});
+            this.graphTools.Location = new System.Drawing.Point(3, 0);
+            this.graphTools.Name = "graphTools";
+            this.graphTools.Size = new System.Drawing.Size(112, 25);
+            this.graphTools.TabIndex = 0;
             // 
             // toolShowInformation
             // 
@@ -279,8 +249,34 @@
             this.toolShowInformation.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolShowInformation.Name = "toolShowInformation";
             this.toolShowInformation.Size = new System.Drawing.Size(23, 22);
+            this.toolShowInformation.Tag = "infoTool";
             this.toolShowInformation.Text = "toolStripButton1";
             this.toolShowInformation.ToolTipText = "Show information";
+            this.toolShowInformation.Click += new System.EventHandler(this.toolAction_Click);
+            // 
+            // toolAddNode
+            // 
+            this.toolAddNode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolAddNode.Image = ((System.Drawing.Image)(resources.GetObject("toolAddNode.Image")));
+            this.toolAddNode.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolAddNode.Name = "toolAddNode";
+            this.toolAddNode.Size = new System.Drawing.Size(23, 22);
+            this.toolAddNode.Tag = "nodeTool";
+            this.toolAddNode.Text = "toolStripButton1";
+            this.toolAddNode.ToolTipText = "Add node";
+            this.toolAddNode.Click += new System.EventHandler(this.toolAction_Click);
+            // 
+            // toolConnectNodes
+            // 
+            this.toolConnectNodes.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolConnectNodes.Image = ((System.Drawing.Image)(resources.GetObject("toolConnectNodes.Image")));
+            this.toolConnectNodes.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolConnectNodes.Name = "toolConnectNodes";
+            this.toolConnectNodes.Size = new System.Drawing.Size(23, 22);
+            this.toolConnectNodes.Tag = "arcTool";
+            this.toolConnectNodes.Text = "toolStripButton2";
+            this.toolConnectNodes.ToolTipText = "Connect nodes";
+            this.toolConnectNodes.Click += new System.EventHandler(this.toolAction_Click);
             // 
             // GPSMainForm
             // 
@@ -305,8 +301,8 @@
             this.infoSplit.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.infoSplit)).EndInit();
             this.infoSplit.ResumeLayout(false);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.graphTools.ResumeLayout(false);
+            this.graphTools.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -317,14 +313,13 @@
         private System.Windows.Forms.TextBox NodeCoordinateY;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripContainer toolStripContainer;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip graphTools;
         private System.Windows.Forms.ToolStripButton toolAddNode;
         private System.Windows.Forms.ToolStripButton toolConnectNodes;
         private System.Windows.Forms.ToolStripButton toolShowInformation;
         private System.Windows.Forms.TextBox NodeCoordinateX;
         private System.Windows.Forms.TextBox NodeName;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ToolStripButton toolDefaultAction;
         private System.Windows.Forms.SplitContainer mainSplit;
         private System.Windows.Forms.SplitContainer infoSplit;
         private System.Windows.Forms.Panel pathSelectionPanel;

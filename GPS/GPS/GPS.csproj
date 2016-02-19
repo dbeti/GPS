@@ -91,6 +91,7 @@
     <Compile Include="GPSMainForm.Designer.cs">
       <DependentUpon>GPSMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GraphDisplay\GraphMouseEventArgs.cs" />
     <Compile Include="GraphDisplay\ICoordinateConverter.cs" />
     <Compile Include="GraphDisplay\IGraphDisplayProperties.cs" />
     <Compile Include="GraphDisplay\PlanarGraphDrawer.cs">

@@ -19,16 +19,6 @@ namespace GPS.GraphDisplay
         private IGraphDisplayProperties displayProps =
             new UglyGraphDisplayProperties();
 
-        public class GraphMouseEventArgs : MouseEventArgs
-        {
-            public GraphObject GraphObject;
-            public GraphMouseEventArgs(MouseEventArgs args, GraphObject obj)
-                : base(args.Button, args.Clicks, args.X, args.Y, args.Delta)
-            {
-                GraphObject = obj;
-            }
-        }
-
         public event EventHandler<GraphMouseEventArgs> GraphMouseClick;
 
         protected virtual void OnGraphMouseClick(GraphMouseEventArgs args)

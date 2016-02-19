@@ -8,49 +8,45 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GPS.Models;
+using GPS.GraphDisplay;
 
 namespace GPS
 {
     public partial class GPSMainForm : Form
     {
+        public interface ITool
+        {
+            void ProcessGraphClick(GraphMouseEventArgs args);
+        }
+
         private static GPSContext db = new GPSContext();
         private Node selected;
-        private ToolStripButton[] ActionTools;
-        private int selectedAction;
+        private ITool currentTool;
 
         public GPSMainForm()
         {
             InitializeComponent();
+
             graphContainer.DbContext = db;
-            ActionTools = new ToolStripButton[]
-            {
-                toolDefaultAction,
-                toolAddNode,
-                toolConnectNodes,
-                toolShowInformation
-            };
-            foreach (ToolStripButton btn in ActionTools)
-            {
-                btn.Click += toolAction_Click;
-            }
-            toolDefaultAction.Checked = true;
             graphObjectEditor.DbContext = db;
+
+            toolShowInformation.Tag = new InfoTool(this);
+            toolAddNode.Tag = new NodeTool(this);
+            toolConnectNodes.Tag = new ArcTool(this);
+
+            toolShowInformation.Checked = true;
+            currentTool = toolShowInformation.Tag as ITool;
         }
 
         private void toolAction_Click(object sender, EventArgs e)
         {
-            foreach (var item in ActionTools.Select((btn, index) => new { index, btn }))
+            var btn = sender as ToolStripButton;
+            currentTool = btn.Tag as ITool;
+            foreach(var tool in graphTools.Items)
             {
-                if (item.btn == (ToolStripButton)sender)
-                {
-                    item.btn.Checked = true;
-                    selectedAction = item.index;
-                }
-                else
-                {
-                    item.btn.Checked = false;
-                }
+                (tool as ToolStripButton).Checked = false;
             }
+            btn.Checked = true;
         }
 
         private void button1_MouseClick(object sender, MouseEventArgs e)
@@ -81,63 +77,11 @@ namespace GPS
 
         }
 
-        private void graphContainer_GraphMouseClick(object sender, 
-            GraphDisplay.PlanarGraphDrawer.GraphMouseEventArgs e)
+        private void graphContainer_GraphMouseClick(
+            object sender, 
+            GraphMouseEventArgs e)
         {
-            switch (selectedAction)
-            {
-                case 1:
-                    if (e.GraphObject == null)
-                    {
-                        graphObjectEditor.GraphObject = new Node()
-                        {
-                            Point = e.Location
-                        };
-                        graphObjectEditor.Editing = true;
-                        infoSplit.Panel2Collapsed = false;
-                    }
-                    else if (e.GraphObject is Node)
-                    {
-                        selected = e.GraphObject as Node;
-                    }
-
-                    break;
-                case 2:
-                    if (e.GraphObject is Node)
-                    {
-                        if (selected != null)
-                        {
-                            graphObjectEditor.GraphObject = new Arc()
-                            {
-                                StartNode = selected,
-                                EndNode = e.GraphObject as Node
-                            };
-                            graphObjectEditor.Editing = true;
-                            infoSplit.Panel2Collapsed = false;
-                            selected = null;
-                        }
-                        else
-                        {
-                            selected = e.GraphObject as Node;
-                        }
-                    }
-                    else
-                    {
-                        selected = null;
-                    }
-                    break;
-                case 3:
-                    if (e.GraphObject != null)
-                    {
-                        infoSplit.Panel2Collapsed = false;
-                        graphObjectEditor.GraphObject = e.GraphObject;
-                    }
-                    else
-                    {
-                        infoSplit.Panel2Collapsed = true;
-                    }
-                    break;
-            }
+            currentTool.ProcessGraphClick(e);
         }
 
         private void graphObjectEditor_GraphObjectUpdated(object sender, 
@@ -151,5 +95,91 @@ namespace GPS
             }
         }
 
+        protected class InfoTool : ITool
+        {
+            private GPSMainForm parent;
+
+            public InfoTool(GPSMainForm parent)
+            {
+                this.parent = parent;
+            }
+
+            public void ProcessGraphClick(GraphMouseEventArgs args)
+            {
+                if (args.GraphObject != null)
+                {
+                    parent.infoSplit.Panel2Collapsed = false;
+                    parent.graphObjectEditor.GraphObject = args.GraphObject;
+                }
+                else
+                {
+                    parent.infoSplit.Panel2Collapsed = true;
+                }
+            }
+        }
+
+        protected class NodeTool : ITool
+        {
+            private GPSMainForm parent;
+
+            public NodeTool(GPSMainForm parent)
+            {
+                this.parent = parent;
+            }
+
+            public void ProcessGraphClick(GraphMouseEventArgs args)
+            {
+                if (args.GraphObject == null)
+                {
+                    parent.graphObjectEditor.GraphObject = new Node()
+                    {
+                        Point = args.Location
+                    };
+                    parent.graphObjectEditor.Editing = true;
+                    parent.infoSplit.Panel2Collapsed = false;
+                }
+                else if (args.GraphObject is Node)
+                {
+                    parent.selected = args.GraphObject as Node;
+                }
+            }
+        }
+
+        protected class ArcTool : ITool
+        {
+            private GPSMainForm parent;
+            private Node startNode = null;
+
+            public ArcTool(GPSMainForm parent)
+            {
+                this.parent = parent;
+            }
+
+            public void ProcessGraphClick(GraphMouseEventArgs args)
+            {
+                if (args.GraphObject is Node)
+                {
+                    if (startNode != null)
+                    {
+                        parent.graphObjectEditor.GraphObject = new Arc()
+                        {
+                            StartNode = startNode,
+                            EndNode = args.GraphObject as Node
+                        };
+                        parent.graphObjectEditor.Editing = true;
+                        parent.infoSplit.Panel2Collapsed = false;
+                        startNode = null;
+                    }
+                    else
+                    {
+                        startNode = args.GraphObject as Node;
+                    }
+                }
+                else
+                {
+                    startNode = null;
+                }
+            }
+        }
     }
 }
