@@ -28,26 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GPSMainForm));
             GPS.Models.Node node1 = new GPS.Models.Node();
-            this.label3 = new System.Windows.Forms.Label();
-            this.NodeName = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.NodeCoordinateY = new System.Windows.Forms.TextBox();
-            this.NodeCoordinateX = new System.Windows.Forms.TextBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GPSMainForm));
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
             this.mainSplit = new System.Windows.Forms.SplitContainer();
             this.pathSelectionPanel = new System.Windows.Forms.Panel();
+            this.pathConstraintsEditor = new GPS.PathConstraintsEditor();
             this.infoSplit = new System.Windows.Forms.SplitContainer();
+            this.graphContainer = new GPS.GraphDisplay.PlanarGraphDrawer();
+            this.graphObjectEditor = new GPS.GraphObjectEditor();
             this.graphTools = new System.Windows.Forms.ToolStrip();
             this.toolShowInformation = new System.Windows.Forms.ToolStripButton();
             this.toolAddNode = new System.Windows.Forms.ToolStripButton();
             this.toolConnectNodes = new System.Windows.Forms.ToolStripButton();
             this.toolShortestPath = new System.Windows.Forms.ToolStripButton();
-            this.graphContainer = new GPS.GraphDisplay.PlanarGraphDrawer();
-            this.graphObjectEditor = new GPS.GraphObjectEditor();
             this.toolStripContainer.ContentPanel.SuspendLayout();
             this.toolStripContainer.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer.SuspendLayout();
@@ -62,64 +56,6 @@
             this.infoSplit.SuspendLayout();
             this.graphTools.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(44, 14);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Name";
-            // 
-            // NodeName
-            // 
-            this.NodeName.Location = new System.Drawing.Point(80, 6);
-            this.NodeName.Name = "NodeName";
-            this.NodeName.Size = new System.Drawing.Size(100, 20);
-            this.NodeName.TabIndex = 5;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(105, 80);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button1_MouseClick);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 62);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Coordinate Y";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Coordinate X";
-            // 
-            // NodeCoordinateY
-            // 
-            this.NodeCoordinateY.Location = new System.Drawing.Point(80, 54);
-            this.NodeCoordinateY.Name = "NodeCoordinateY";
-            this.NodeCoordinateY.Size = new System.Drawing.Size(100, 20);
-            this.NodeCoordinateY.TabIndex = 1;
-            // 
-            // NodeCoordinateX
-            // 
-            this.NodeCoordinateX.Location = new System.Drawing.Point(80, 30);
-            this.NodeCoordinateX.Name = "NodeCoordinateX";
-            this.NodeCoordinateX.Size = new System.Drawing.Size(100, 20);
-            this.NodeCoordinateX.TabIndex = 0;
             // 
             // toolStripContainer
             // 
@@ -166,18 +102,24 @@
             // pathSelectionPanel
             // 
             this.pathSelectionPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pathSelectionPanel.Controls.Add(this.label3);
-            this.pathSelectionPanel.Controls.Add(this.label1);
-            this.pathSelectionPanel.Controls.Add(this.NodeName);
-            this.pathSelectionPanel.Controls.Add(this.NodeCoordinateY);
-            this.pathSelectionPanel.Controls.Add(this.button1);
-            this.pathSelectionPanel.Controls.Add(this.label2);
-            this.pathSelectionPanel.Controls.Add(this.NodeCoordinateX);
+            this.pathSelectionPanel.Controls.Add(this.pathConstraintsEditor);
             this.pathSelectionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pathSelectionPanel.Location = new System.Drawing.Point(0, 0);
             this.pathSelectionPanel.Name = "pathSelectionPanel";
             this.pathSelectionPanel.Size = new System.Drawing.Size(200, 526);
             this.pathSelectionPanel.TabIndex = 7;
+            // 
+            // pathConstraintsEditor
+            // 
+            this.pathConstraintsEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pathConstraintsEditor.EndNode = null;
+            this.pathConstraintsEditor.Location = new System.Drawing.Point(0, 0);
+            this.pathConstraintsEditor.Name = "pathConstraintsEditor";
+            this.pathConstraintsEditor.Size = new System.Drawing.Size(198, 524);
+            this.pathConstraintsEditor.StartNode = null;
+            this.pathConstraintsEditor.TabIndex = 0;
+            this.pathConstraintsEditor.PathFound += new System.EventHandler<GPS.PathConstraintsEditor.PathFoundEvenArgs>(this.pathConstraintsEditor_PathFound);
+            this.pathConstraintsEditor.Closed += new System.EventHandler(this.pathConstraintsEditor_Closed);
             // 
             // infoSplit
             // 
@@ -196,6 +138,36 @@
             this.infoSplit.Size = new System.Drawing.Size(570, 526);
             this.infoSplit.SplitterDistance = 382;
             this.infoSplit.TabIndex = 0;
+            // 
+            // graphContainer
+            // 
+            this.graphContainer.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.graphContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.graphContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.graphContainer.Location = new System.Drawing.Point(0, 0);
+            this.graphContainer.Name = "graphContainer";
+            this.graphContainer.Size = new System.Drawing.Size(382, 526);
+            this.graphContainer.TabIndex = 0;
+            this.graphContainer.GraphMouseClick += new System.EventHandler<GPS.GraphDisplay.GraphMouseEventArgs>(this.graphContainer_GraphMouseClick);
+            // 
+            // graphObjectEditor
+            // 
+            this.graphObjectEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.graphObjectEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            node1.CoordinateX = 0;
+            node1.CoordinateY = 0;
+            node1.Features = null;
+            node1.GraphObjectId = 0;
+            node1.InArcs = null;
+            node1.Name = null;
+            node1.OutArcs = null;
+            node1.Point = new System.Drawing.Point(0, 0);
+            this.graphObjectEditor.GraphObject = node1;
+            this.graphObjectEditor.Location = new System.Drawing.Point(0, 0);
+            this.graphObjectEditor.Name = "graphObjectEditor";
+            this.graphObjectEditor.Size = new System.Drawing.Size(184, 526);
+            this.graphObjectEditor.TabIndex = 6;
+            this.graphObjectEditor.GraphObjectUpdated += new System.EventHandler<GPS.GraphObjectEditor.GraphObjectEventArgs>(this.graphObjectEditor_GraphObjectUpdated);
             // 
             // graphTools
             // 
@@ -259,36 +231,6 @@
             this.toolShortestPath.ToolTipText = "Calculate shortest path";
             this.toolShortestPath.Click += new System.EventHandler(this.toolAction_Click);
             // 
-            // graphContainer
-            // 
-            this.graphContainer.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.graphContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.graphContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.graphContainer.Location = new System.Drawing.Point(0, 0);
-            this.graphContainer.Name = "graphContainer";
-            this.graphContainer.Size = new System.Drawing.Size(382, 526);
-            this.graphContainer.TabIndex = 0;
-            this.graphContainer.GraphMouseClick += new System.EventHandler<GPS.GraphDisplay.GraphMouseEventArgs>(this.graphContainer_GraphMouseClick);
-            // 
-            // graphObjectEditor
-            // 
-            this.graphObjectEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.graphObjectEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            node1.CoordinateX = 0;
-            node1.CoordinateY = 0;
-            node1.Features = null;
-            node1.GraphObjectId = 0;
-            node1.InArcs = null;
-            node1.Name = null;
-            node1.OutArcs = null;
-            node1.Point = new System.Drawing.Point(0, 0);
-            this.graphObjectEditor.GraphObject = node1;
-            this.graphObjectEditor.Location = new System.Drawing.Point(0, 0);
-            this.graphObjectEditor.Name = "graphObjectEditor";
-            this.graphObjectEditor.Size = new System.Drawing.Size(184, 526);
-            this.graphObjectEditor.TabIndex = 6;
-            this.graphObjectEditor.GraphObjectUpdated += new System.EventHandler<GPS.GraphObjectEditor.GraphObjectEventArgs>(this.graphObjectEditor_GraphObjectUpdated);
-            // 
             // GPSMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -307,7 +249,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.mainSplit)).EndInit();
             this.mainSplit.ResumeLayout(false);
             this.pathSelectionPanel.ResumeLayout(false);
-            this.pathSelectionPanel.PerformLayout();
             this.infoSplit.Panel1.ResumeLayout(false);
             this.infoSplit.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.infoSplit)).EndInit();
@@ -319,24 +260,18 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox NodeCoordinateY;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripContainer toolStripContainer;
         private System.Windows.Forms.ToolStrip graphTools;
         private System.Windows.Forms.ToolStripButton toolAddNode;
         private System.Windows.Forms.ToolStripButton toolConnectNodes;
         private System.Windows.Forms.ToolStripButton toolShowInformation;
-        private System.Windows.Forms.TextBox NodeCoordinateX;
-        private System.Windows.Forms.TextBox NodeName;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.SplitContainer mainSplit;
         private System.Windows.Forms.SplitContainer infoSplit;
         private System.Windows.Forms.Panel pathSelectionPanel;
         private GraphObjectEditor graphObjectEditor;
         private GraphDisplay.PlanarGraphDrawer graphContainer;
         private System.Windows.Forms.ToolStripButton toolShortestPath;
+        private PathConstraintsEditor pathConstraintsEditor;
     }
 }
 

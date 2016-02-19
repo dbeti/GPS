@@ -22,7 +22,7 @@ namespace GPS
         }
 
         private static GPSContext db = new GPSContext();
-        private Node selected;
+        //private Node selected;
         private ITool currentTool;
 
         public GPSMainForm()
@@ -31,6 +31,7 @@ namespace GPS
 
             graphContainer.DbContext = db;
             graphObjectEditor.DbContext = db;
+            pathConstraintsEditor.DbContext = db;
 
             toolShowInformation.Tag = new InfoTool(this);
             toolAddNode.Tag = new NodeTool(this);
@@ -38,6 +39,7 @@ namespace GPS
             toolShortestPath.Tag = new ShortestPathTool(this);
 
             infoSplit.Panel2Collapsed = true;
+            mainSplit.Panel1Collapsed = true;
 
             toolShowInformation.Checked = true;
             currentTool = toolShowInformation.Tag as ITool;
@@ -53,34 +55,6 @@ namespace GPS
                 (tool as ToolStripButton).Checked = false;
             }
             btn.Checked = true;
-        }
-
-        private void button1_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (selected == null)
-            {
-                MessageBox.Show("Please select start node", "Warning");
-            }
-            else {
-                Node node = new Node();
-
-                try
-                {
-                    node.CoordinateX = Convert.ToInt32(this.NodeCoordinateX.Text);
-                    node.CoordinateY = Convert.ToInt32(this.NodeCoordinateY.Text);
-                    node.Name = NodeName.Text;
-                    db.Nodes.Add(node);
-                    db.Arcs.Add(new Arc("TestArc", selected, node));
-                    db.SaveChanges();
-                    selected = null;
-                    graphContainer.Refresh();
-                }
-                catch (FormatException formatException)
-                {
-                    MessageBox.Show("Please enter valid values for coordinates", "Warning");
-                }
-            }
-
         }
 
         private void graphContainer_GraphMouseClick(
@@ -153,10 +127,6 @@ namespace GPS
                     };
                     parent.graphObjectEditor.Editing = true;
                     parent.infoSplit.Panel2Collapsed = false;
-                }
-                else if (args.GraphObject is Node)
-                {
-                    parent.selected = args.GraphObject as Node;
                 }
             }
 
@@ -243,28 +213,38 @@ namespace GPS
         protected class ShortestPathTool : TwoNodeSelectTool
         {
             private IPathFinder pathFinder;
-            private IList<GraphObject> path;
 
             public ShortestPathTool(GPSMainForm parent) : base(parent)
             {
                 pathFinder = new AStarPathFinder();
             }
 
+            public override void ProcessGraphClick(GraphMouseEventArgs args)
+            {
+                base.ProcessGraphClick(args);
+                parent.pathConstraintsEditor.StartNode = firstNode;
+                parent.pathConstraintsEditor.EndNode = secondNode;
+            }
+
             protected override void onTwoNodesSelected(
                 Node firstNode,
                 Node secondNode)
             {
-                path = pathFinder.FindPath(firstNode, secondNode, 
-                    Enumerable.Empty<FeatureType>());
-                parent.graphContainer.HighlightPath(path);
+                parent.mainSplit.Panel1Collapsed = false;
             }
+        }
 
-            public override void Cleanup()
-            {
-                base.Cleanup();
-                parent.graphContainer.HighlightPath(null);
-                path = null;
-            }
+        private void pathConstraintsEditor_PathFound(
+            object sender,
+            PathConstraintsEditor.PathFoundEvenArgs e)
+        {
+            graphContainer.HighlightPath(e.Path);
+        }
+
+        private void pathConstraintsEditor_Closed(object sender, EventArgs e)
+        {
+            graphContainer.HighlightPath(null);
+            mainSplit.Panel1Collapsed = true;
         }
     }
 }

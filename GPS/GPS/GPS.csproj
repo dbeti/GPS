@@ -127,6 +127,12 @@
     <Compile Include="NodeDialog.Designer.cs">
       <DependentUpon>NodeDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="PathConstraintsEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PathConstraintsEditor.Designer.cs">
+      <DependentUpon>PathConstraintsEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="PathFinders\AStarPathFinder.cs" />
     <Compile Include="PathFinders\Data.cs" />
     <Compile Include="GraphDisplay\GraphObjectPlanarDrawer.cs" />
@@ -150,6 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NodeDialog.resx">
       <DependentUpon>NodeDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PathConstraintsEditor.resx">
+      <DependentUpon>PathConstraintsEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
