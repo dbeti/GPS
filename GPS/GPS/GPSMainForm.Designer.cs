@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GPSMainForm));
-            GPS.Models.Node node3 = new GPS.Models.Node();
+            GPS.Models.Node node1 = new GPS.Models.Node();
             this.label3 = new System.Windows.Forms.Label();
             this.NodeName = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -280,20 +280,20 @@
             // graphObjectEditor
             // 
             this.graphObjectEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.graphObjectEditor.Editing = false;
-            node3.CoordinateX = 0;
-            node3.CoordinateY = 0;
-            node3.Features = null;
-            node3.GraphObjectId = 0;
-            node3.InArcs = null;
-            node3.Name = null;
-            node3.OutArcs = null;
-            node3.Point = new System.Drawing.Point(0, 0);
-            this.graphObjectEditor.GraphObject = node3;
+            node1.CoordinateX = 0;
+            node1.CoordinateY = 0;
+            node1.Features = null;
+            node1.GraphObjectId = 0;
+            node1.InArcs = null;
+            node1.Name = null;
+            node1.OutArcs = null;
+            node1.Point = new System.Drawing.Point(0, 0);
+            this.graphObjectEditor.GraphObject = node1;
             this.graphObjectEditor.Location = new System.Drawing.Point(0, 0);
             this.graphObjectEditor.Name = "graphObjectEditor";
             this.graphObjectEditor.Size = new System.Drawing.Size(174, 524);
             this.graphObjectEditor.TabIndex = 6;
+            this.graphObjectEditor.GraphObjectUpdated += new System.EventHandler<GPS.GraphObjectEditor.GraphObjectEventArgs>(this.graphObjectEditor_GraphObjectUpdated);
             // 
             // GPSMainForm
             // 

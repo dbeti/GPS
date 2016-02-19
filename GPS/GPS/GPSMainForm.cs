@@ -98,8 +98,15 @@ namespace GPS
                     node = clicked(e);
                     if (node == null)
                     {
-                        NodeDialog nodeDialog = new NodeDialog(e, graphContainer, db);
-                        nodeDialog.ShowDialog();
+                        graphObjectEditor.GraphObject = new Node()
+                        {
+                            Point = e.Location
+                        };
+                        graphObjectEditor.Editing = true;
+                        infoSplit.Panel2Collapsed = false;
+
+                        // NodeDialog nodeDialog = new NodeDialog(e, graphContainer, db);
+                        // nodeDialog.ShowDialog();
                         
                     }
                     else
@@ -112,8 +119,15 @@ namespace GPS
                     node = clicked(e);
                     if (selected != null && node != null)
                     {
-                        ArcDialog arcDialog = new ArcDialog(e, graphContainer, selected, node, db);
-                        arcDialog.Show();
+                        graphObjectEditor.GraphObject = new Arc()
+                        {
+                            StartNode = selected,
+                            EndNode = node
+                        };
+                        graphObjectEditor.Editing = true;
+                        infoSplit.Panel2Collapsed = false;
+                        //ArcDialog arcDialog = new ArcDialog(e, graphContainer, selected, node, db);
+                        //arcDialog.Show();
                         selected = null;
                     }
                     else if (node != null)
@@ -169,6 +183,17 @@ namespace GPS
                 }
             }
             return null;
+        }
+
+        private void graphObjectEditor_GraphObjectUpdated(object sender, 
+            GraphObjectEditor.GraphObjectEventArgs e)
+        {
+            graphContainer.Refresh();
+            if (e.ChangeKind == GraphObjectEditor.ChangeKind.Canceled ||
+                e.ChangeKind == GraphObjectEditor.ChangeKind.Deleted)
+            {
+                infoSplit.Panel2Collapsed = true;
+            }
         }
     }
 }

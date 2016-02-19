@@ -14,12 +14,40 @@ namespace GPS
 {
     public partial class GraphObjectEditor : UserControl
     {
-        private readonly Control[] editControls;
-
+        
         private GraphObject graphObject;
         private bool editing;
         private ISpecificsEditor specificsEditor;
+
         public GPSContext DbContext;
+
+        public enum ChangeKind { Created, Deleted, Updated, Canceled };
+
+        public class GraphObjectEventArgs : EventArgs
+        {
+            public GraphObject GraphObject;
+            public ChangeKind ChangeKind;
+
+            public GraphObjectEventArgs(
+                GraphObject graphObject,
+                ChangeKind changeKind)
+            {
+                GraphObject = graphObject;
+                ChangeKind = changeKind;
+            }
+        };
+
+        [Browsable(true)]
+        public event EventHandler<GraphObjectEventArgs> GraphObjectUpdated;
+
+        protected virtual void OnGraphObjectUpdated(GraphObjectEventArgs args)
+        {
+            var handler = GraphObjectUpdated;
+            if (handler != null)
+            {
+                handler(this, args);
+            }
+        }
 
         protected interface ISpecificsEditor
         {
@@ -34,14 +62,11 @@ namespace GPS
         public GraphObjectEditor()
         {
             InitializeComponent();
-            editControls = new Control[]
-            {
-                nameBox,
-            };
             GraphObject = new Node();
             showObjectData();
         }
 
+        [Browsable(true), DefaultValue(null)]
         public GraphObject GraphObject
         {
             get { return graphObject; }
@@ -63,13 +88,14 @@ namespace GPS
                 }
                 else
                 {
-                    throw new ArgumentException("unsuported graph object");
+                    throw new ArgumentException("unsuported GraphObject");
                 }
                 specificsEditor.Visible = true;
                 Editing = false;
             }
         }
 
+        [Browsable(true), DefaultValue(false)]
         public bool Editing
         {
             get { return editing; }
@@ -77,30 +103,18 @@ namespace GPS
             {
                 editing = value;
                 specificsEditor.Editing = value;
-                if (editing)
-                {
-                    foreach(var control in editControls)
-                    {
-                        control.Enabled = true;
-                    }
-                    editButton.Visible = false;
-                    deleteButton.Visible = false;
-                    saveButton.Visible = true;
-                    cancelButton.Visible = true;
+                
+                nameBox.ReadOnly = !value;
+                editButton.Visible = !value;
+                deleteButton.Visible = !value;
+                saveButton.Visible = value;
+                cancelButton.Visible = value;
 
-                }
-                else
+                if (!value)
                 {
-                    foreach (var control in editControls)
-                    {
-                        control.Enabled = false;
-                    }
-                    editButton.Visible = true;
-                    deleteButton.Visible = true;
-                    saveButton.Visible = false;
-                    cancelButton.Visible = false;
                     showObjectData();
                 }
+                
             }
         }
 
@@ -118,14 +132,23 @@ namespace GPS
 
         private void updateObject()
         {
+            ChangeKind changeKind = graphObject.GraphObjectId == 0 ? 
+                ChangeKind.Created : ChangeKind.Updated;
             graphObject.Name = nameBox.Text;
             specificsEditor.updateObject();
             DbContext.SaveChanges();
+            OnGraphObjectUpdated(new GraphObjectEventArgs(
+                    graphObject, changeKind));
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
             Editing = false;
+            if (graphObject.GraphObjectId == 0)
+            {
+                OnGraphObjectUpdated(new GraphObjectEventArgs(
+                    graphObject, ChangeKind.Canceled));
+            }
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -136,26 +159,25 @@ namespace GPS
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            specificsEditor.removeObject();
-            DbContext.SaveChanges();
-            GraphObject = new Node();
+            if (graphObject.GraphObjectId != 0)
+            {
+                specificsEditor.removeObject();
+                DbContext.SaveChanges();
+                GraphObject = new Node();
+                OnGraphObjectUpdated(new GraphObjectEventArgs(
+                    graphObject, ChangeKind.Deleted));
+            }
         }
 
         protected class NodeSpecificsEditor : ISpecificsEditor
         {
             private GraphObjectEditor parent;
             private Node node;
-            private Control[] editControls;
-
+            
             public NodeSpecificsEditor(GraphObjectEditor parent, Node node)
             {
                 this.parent = parent;
                 this.node = node;
-                editControls = new Control[]
-                {
-                    parent.coordSelectorX,
-                    parent.coordSelectorY,
-                };
             }
 
             public bool Visible
@@ -167,10 +189,8 @@ namespace GPS
             {
                 set
                 {
-                    foreach (var control in editControls)
-                    {
-                        control.Enabled = value;
-                    }
+                    parent.coordSelectorX.ReadOnly = !value;
+                    parent.coordSelectorY.ReadOnly = !value;
                     showObjectData();
                 }
             }
@@ -206,18 +226,11 @@ namespace GPS
         {
             private GraphObjectEditor parent;
             private Arc arc;
-            private Control[] editControls;
-
+           
             public ArcSpecificsEditor(GraphObjectEditor parent, Arc arc)
             {
                 this.parent = parent;
                 this.arc = arc;
-                editControls = new Control[]
-                {
-                    // parent.startNodeBox,
-                    // parent.endNodeBox,
-                    parent.directedBox
-                };
             }
             
             public bool Visible
@@ -229,10 +242,7 @@ namespace GPS
             {
                 set
                 {
-                    foreach (var control in editControls)
-                    {
-                        control.Enabled = value;
-                    }
+                    parent.directedBox.AutoCheck = value;
                     showObjectData();
                 }
             }

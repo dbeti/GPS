@@ -85,9 +85,9 @@
             // 
             this.nameBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.nameBox.Enabled = false;
             this.nameBox.Location = new System.Drawing.Point(80, 10);
             this.nameBox.Name = "nameBox";
+            this.nameBox.ReadOnly = true;
             this.nameBox.Size = new System.Drawing.Size(80, 20);
             this.nameBox.TabIndex = 3;
             // 
@@ -95,9 +95,9 @@
             // 
             this.idBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.idBox.Enabled = false;
             this.idBox.Location = new System.Drawing.Point(80, 40);
             this.idBox.Name = "idBox";
+            this.idBox.ReadOnly = true;
             this.idBox.Size = new System.Drawing.Size(80, 20);
             this.idBox.TabIndex = 4;
             // 
@@ -105,7 +105,6 @@
             // 
             this.coordSelectorX.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.coordSelectorX.Enabled = false;
             this.coordSelectorX.Location = new System.Drawing.Point(80, 5);
             this.coordSelectorX.Maximum = new decimal(new int[] {
             1000000,
@@ -118,6 +117,7 @@
             0,
             -2147483648});
             this.coordSelectorX.Name = "coordSelectorX";
+            this.coordSelectorX.ReadOnly = true;
             this.coordSelectorX.Size = new System.Drawing.Size(80, 20);
             this.coordSelectorX.TabIndex = 5;
             // 
@@ -125,7 +125,6 @@
             // 
             this.coordSelectorY.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.coordSelectorY.Enabled = false;
             this.coordSelectorY.Location = new System.Drawing.Point(80, 35);
             this.coordSelectorY.Maximum = new decimal(new int[] {
             1000000,
@@ -138,6 +137,7 @@
             0,
             -2147483648});
             this.coordSelectorY.Name = "coordSelectorY";
+            this.coordSelectorY.ReadOnly = true;
             this.coordSelectorY.Size = new System.Drawing.Size(80, 20);
             this.coordSelectorY.TabIndex = 6;
             // 
@@ -250,9 +250,9 @@
             // 
             this.startNodeBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.startNodeBox.Enabled = false;
             this.startNodeBox.Location = new System.Drawing.Point(80, 5);
             this.startNodeBox.Name = "startNodeBox";
+            this.startNodeBox.ReadOnly = true;
             this.startNodeBox.Size = new System.Drawing.Size(80, 20);
             this.startNodeBox.TabIndex = 3;
             // 
@@ -260,9 +260,9 @@
             // 
             this.endNodeBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.endNodeBox.Enabled = false;
             this.endNodeBox.Location = new System.Drawing.Point(80, 35);
             this.endNodeBox.Name = "endNodeBox";
+            this.endNodeBox.ReadOnly = true;
             this.endNodeBox.Size = new System.Drawing.Size(80, 20);
             this.endNodeBox.TabIndex = 4;
             // 
@@ -270,7 +270,7 @@
             // 
             this.directedBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.directedBox.Enabled = false;
+            this.directedBox.AutoCheck = false;
             this.directedBox.Location = new System.Drawing.Point(80, 65);
             this.directedBox.Name = "directedBox";
             this.directedBox.Size = new System.Drawing.Size(80, 20);
