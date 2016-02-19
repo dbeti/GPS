@@ -37,6 +37,8 @@ namespace GPS
             toolConnectNodes.Tag = new ArcTool(this);
             toolShortestPath.Tag = new ShortestPathTool(this);
 
+            infoSplit.Panel2Collapsed = true;
+
             toolShowInformation.Checked = true;
             currentTool = toolShowInformation.Tag as ITool;
         }

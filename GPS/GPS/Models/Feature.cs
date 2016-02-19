@@ -17,7 +17,7 @@ namespace GPS.Models
 
         [ForeignKey("FeatureType")]
         public int FeatureTypeId { get; set; }
-        public FeatureType FeatureType { get; set; }
+        public virtual FeatureType FeatureType { get; set; }
 
         public Feature() { }
         public Feature(string name, GraphObject graphObject,

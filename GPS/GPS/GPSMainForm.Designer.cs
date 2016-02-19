@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            GPS.Models.Node node1 = new GPS.Models.Node();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GPSMainForm));
+            GPS.Models.Node node1 = new GPS.Models.Node();
             this.label3 = new System.Windows.Forms.Label();
             this.NodeName = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -41,13 +41,13 @@
             this.mainSplit = new System.Windows.Forms.SplitContainer();
             this.pathSelectionPanel = new System.Windows.Forms.Panel();
             this.infoSplit = new System.Windows.Forms.SplitContainer();
-            this.graphContainer = new GPS.GraphDisplay.PlanarGraphDrawer();
-            this.graphObjectEditor = new GPS.GraphObjectEditor();
             this.graphTools = new System.Windows.Forms.ToolStrip();
             this.toolShowInformation = new System.Windows.Forms.ToolStripButton();
             this.toolAddNode = new System.Windows.Forms.ToolStripButton();
             this.toolConnectNodes = new System.Windows.Forms.ToolStripButton();
             this.toolShortestPath = new System.Windows.Forms.ToolStripButton();
+            this.graphContainer = new GPS.GraphDisplay.PlanarGraphDrawer();
+            this.graphObjectEditor = new GPS.GraphObjectEditor();
             this.toolStripContainer.ContentPanel.SuspendLayout();
             this.toolStripContainer.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer.SuspendLayout();
@@ -193,40 +193,9 @@
             // infoSplit.Panel2
             // 
             this.infoSplit.Panel2.Controls.Add(this.graphObjectEditor);
-            this.infoSplit.Panel2Collapsed = true;
             this.infoSplit.Size = new System.Drawing.Size(570, 526);
-            this.infoSplit.SplitterDistance = 386;
+            this.infoSplit.SplitterDistance = 382;
             this.infoSplit.TabIndex = 0;
-            // 
-            // graphContainer
-            // 
-            this.graphContainer.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.graphContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.graphContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.graphContainer.Location = new System.Drawing.Point(0, 0);
-            this.graphContainer.Name = "graphContainer";
-            this.graphContainer.Size = new System.Drawing.Size(570, 526);
-            this.graphContainer.TabIndex = 0;
-            this.graphContainer.GraphMouseClick += new System.EventHandler<GPS.GraphDisplay.GraphMouseEventArgs>(this.graphContainer_GraphMouseClick);
-            // 
-            // graphObjectEditor
-            // 
-            this.graphObjectEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.graphObjectEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            node1.CoordinateX = 0;
-            node1.CoordinateY = 0;
-            node1.Features = null;
-            node1.GraphObjectId = 0;
-            node1.InArcs = null;
-            node1.Name = null;
-            node1.OutArcs = null;
-            node1.Point = new System.Drawing.Point(0, 0);
-            this.graphObjectEditor.GraphObject = node1;
-            this.graphObjectEditor.Location = new System.Drawing.Point(0, 0);
-            this.graphObjectEditor.Name = "graphObjectEditor";
-            this.graphObjectEditor.Size = new System.Drawing.Size(96, 100);
-            this.graphObjectEditor.TabIndex = 6;
-            this.graphObjectEditor.GraphObjectUpdated += new System.EventHandler<GPS.GraphObjectEditor.GraphObjectEventArgs>(this.graphObjectEditor_GraphObjectUpdated);
             // 
             // graphTools
             // 
@@ -240,7 +209,7 @@
             this.toolShortestPath});
             this.graphTools.Location = new System.Drawing.Point(3, 0);
             this.graphTools.Name = "graphTools";
-            this.graphTools.Size = new System.Drawing.Size(135, 25);
+            this.graphTools.Size = new System.Drawing.Size(104, 25);
             this.graphTools.TabIndex = 0;
             // 
             // toolShowInformation
@@ -289,6 +258,36 @@
             this.toolShortestPath.Text = "toolStripButton1";
             this.toolShortestPath.ToolTipText = "Calculate shortest path";
             this.toolShortestPath.Click += new System.EventHandler(this.toolAction_Click);
+            // 
+            // graphContainer
+            // 
+            this.graphContainer.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.graphContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.graphContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.graphContainer.Location = new System.Drawing.Point(0, 0);
+            this.graphContainer.Name = "graphContainer";
+            this.graphContainer.Size = new System.Drawing.Size(382, 526);
+            this.graphContainer.TabIndex = 0;
+            this.graphContainer.GraphMouseClick += new System.EventHandler<GPS.GraphDisplay.GraphMouseEventArgs>(this.graphContainer_GraphMouseClick);
+            // 
+            // graphObjectEditor
+            // 
+            this.graphObjectEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.graphObjectEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            node1.CoordinateX = 0;
+            node1.CoordinateY = 0;
+            node1.Features = null;
+            node1.GraphObjectId = 0;
+            node1.InArcs = null;
+            node1.Name = null;
+            node1.OutArcs = null;
+            node1.Point = new System.Drawing.Point(0, 0);
+            this.graphObjectEditor.GraphObject = node1;
+            this.graphObjectEditor.Location = new System.Drawing.Point(0, 0);
+            this.graphObjectEditor.Name = "graphObjectEditor";
+            this.graphObjectEditor.Size = new System.Drawing.Size(184, 526);
+            this.graphObjectEditor.TabIndex = 6;
+            this.graphObjectEditor.GraphObjectUpdated += new System.EventHandler<GPS.GraphObjectEditor.GraphObjectEventArgs>(this.graphObjectEditor_GraphObjectUpdated);
             // 
             // GPSMainForm
             // 

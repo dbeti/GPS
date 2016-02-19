@@ -123,6 +123,17 @@ namespace GPS
             nameBox.Text = graphObject.Name;
             idBox.Text = graphObject.GraphObjectId.ToString();
             specificsEditor.showObjectData();
+            featureView.Items.Clear();
+            if (graphObject.Features != null)
+            {
+                foreach (var feature in graphObject.Features)
+                {
+                    var item = new ListViewItem(feature.Name);
+                    item.SubItems.Add(feature.FeatureType.Name);
+                    item.Tag = feature;
+                    featureView.Items.Add(item);
+                }
+            }
         }
 
         private void editButton_Click(object sender, EventArgs e)
@@ -270,6 +281,46 @@ namespace GPS
                     parent.DbContext.Arcs.Remove(arc);
                 }
             }
+        }
+
+        private void addFeatureButton_Click(object sender, EventArgs e)
+        {
+            string name = featureNameBox.Text;
+            string typeName = featureTypeBox.Text;
+            if (name != "" && typeName != "")
+            {
+                FeatureType type = DbContext.FeatureTypes
+                    .FirstOrDefault(x => x.Name == typeName);
+                if (type == null)
+                {
+                    type = new FeatureType(typeName);
+                    DbContext.FeatureTypes.Add(type);
+                }
+                var feature = new Feature(name, graphObject, type);
+                DbContext.Features.Add(feature);
+                DbContext.SaveChanges();
+                showObjectData();
+                featureNameBox.Text = "";
+                featureTypeBox.Text = "";
+            }
+        }
+
+        private void featureView_SelectedIndexChanged(
+            object sender,
+            EventArgs e)
+        {
+            removeFeatureButton.Enabled = featureView.SelectedItems.Count > 0;
+        }
+
+        private void removeFeatureButton_Click(object sender, EventArgs e)
+        {
+            foreach(ListViewItem item in featureView.SelectedItems)
+            {
+                DbContext.Features.Remove(item.Tag as Feature);
+            }
+            DbContext.SaveChanges();
+            removeFeatureButton.Enabled = false;
+            showObjectData();
         }
     }
 }
