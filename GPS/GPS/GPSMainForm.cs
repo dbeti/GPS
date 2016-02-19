@@ -129,19 +129,11 @@ namespace GPS
                     GraphObject graphObject = objectClicked(e);
                     if (graphObject != null)
                     {
-                        Label.Text = graphObject.Name;
-                        // Temporary, replace with feature properties
-                        CoordinateX.Text = graphObject.Location().X.ToString();
-                        CoordinateY.Text = graphObject.Location().Y.ToString();
-
-                        Label.Visible = true;
-                        CoordinateX.Visible = true;
-                        CoordinateY.Visible = true;
-
-                        LabelName.Visible = true;
-                        LabelCoordinateX.Visible = true;
-                        LabelCoordinateY.Visible = true;
+                        infoSplit.Panel2Collapsed = false; 
                         graphObjectEditor.GraphObject = graphObject;
+                    } else
+                    {
+                        infoSplit.Panel2Collapsed = true;
                     }
                     break;
             }

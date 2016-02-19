@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GPSMainForm));
-            GPS.Models.Node node2 = new GPS.Models.Node();
+            GPS.Models.Node node3 = new GPS.Models.Node();
             this.label3 = new System.Windows.Forms.Label();
             this.NodeName = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -131,7 +131,7 @@
             this.graphContainer.Location = new System.Drawing.Point(0, 0);
             this.graphContainer.Name = "graphContainer";
             this.graphContainer.Padding = new System.Windows.Forms.Padding(10);
-            this.graphContainer.Size = new System.Drawing.Size(390, 526);
+            this.graphContainer.Size = new System.Drawing.Size(570, 526);
             this.graphContainer.TabIndex = 1;
             this.graphContainer.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             this.graphContainer.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseClick);
@@ -208,6 +208,7 @@
             // infoSplit.Panel2
             // 
             this.infoSplit.Panel2.Controls.Add(this.infoPanel);
+            this.infoSplit.Panel2Collapsed = true;
             this.infoSplit.Size = new System.Drawing.Size(570, 526);
             this.infoSplit.SplitterDistance = 390;
             this.infoSplit.TabIndex = 0;
@@ -234,7 +235,7 @@
             this.toolShowInformation});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(135, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(104, 25);
             this.toolStrip1.TabIndex = 0;
             // 
             // toolDefaultAction
@@ -280,15 +281,15 @@
             // 
             this.graphObjectEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.graphObjectEditor.Editing = false;
-            node2.CoordinateX = 0;
-            node2.CoordinateY = 0;
-            node2.Features = null;
-            node2.GraphObjectId = 0;
-            node2.InArcs = null;
-            node2.Name = null;
-            node2.OutArcs = null;
-            node2.Point = new System.Drawing.Point(0, 0);
-            this.graphObjectEditor.GraphObject = node2;
+            node3.CoordinateX = 0;
+            node3.CoordinateY = 0;
+            node3.Features = null;
+            node3.GraphObjectId = 0;
+            node3.InArcs = null;
+            node3.Name = null;
+            node3.OutArcs = null;
+            node3.Point = new System.Drawing.Point(0, 0);
+            this.graphObjectEditor.GraphObject = node3;
             this.graphObjectEditor.Location = new System.Drawing.Point(0, 0);
             this.graphObjectEditor.Name = "graphObjectEditor";
             this.graphObjectEditor.Size = new System.Drawing.Size(174, 524);
