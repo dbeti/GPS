@@ -91,6 +91,12 @@
     <Compile Include="GPSMainForm.Designer.cs">
       <DependentUpon>GPSMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GraphDisplay\PlanarGraphDrawer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GraphDisplay\PlanarGraphDrawer.Designer.cs">
+      <DependentUpon>PlanarGraphDrawer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201602190017023_InitialMigration.cs" />
     <Compile Include="Migrations\201602190017023_InitialMigration.Designer.cs">
       <DependentUpon>201602190017023_InitialMigration.cs</DependentUpon>
@@ -163,6 +169,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

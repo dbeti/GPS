@@ -21,6 +21,7 @@ namespace GPS
         public GPSMainForm()
         {
             InitializeComponent();
+            graphContainer.DbContext = db;
             ActionTools = new ToolStripButton[]
             {
                 toolDefaultAction,
@@ -78,25 +79,14 @@ namespace GPS
                 }
             }
 
-
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
+        private void graphContainer_GraphMouseClick(object sender, GraphDisplay.PlanarGraphDrawer.GraphMouseEventArgs e)
         {
-            foreach (GraphObject graphObject in db.GraphObjects.ToList())
-            {
-                graphObject.Draw(e);
-            }
-        }
-
-        private void panel2_MouseClick(object sender, MouseEventArgs e)
-        {
-            Node node;
             switch (selectedAction)
             {
                 case 1:
-                    node = clicked(e);
-                    if (node == null)
+                    if (e.GraphObject == null)
                     {
                         graphObjectEditor.GraphObject = new Node()
                         {
@@ -104,35 +94,31 @@ namespace GPS
                         };
                         graphObjectEditor.Editing = true;
                         infoSplit.Panel2Collapsed = false;
-
-                        // NodeDialog nodeDialog = new NodeDialog(e, graphContainer, db);
-                        // nodeDialog.ShowDialog();
-                        
                     }
-                    else
+                    else if (e.GraphObject is Node)
                     {
-                        selected = node;
+                        selected = e.GraphObject as Node;
                     }
 
                     break;
                 case 2:
-                    node = clicked(e);
-                    if (selected != null && node != null)
+                    if (e.GraphObject is Node)
                     {
-                        graphObjectEditor.GraphObject = new Arc()
+                        if (selected != null)
                         {
-                            StartNode = selected,
-                            EndNode = node
-                        };
-                        graphObjectEditor.Editing = true;
-                        infoSplit.Panel2Collapsed = false;
-                        //ArcDialog arcDialog = new ArcDialog(e, graphContainer, selected, node, db);
-                        //arcDialog.Show();
-                        selected = null;
-                    }
-                    else if (node != null)
-                    {
-                        selected = node;
+                            graphObjectEditor.GraphObject = new Arc()
+                            {
+                                StartNode = selected,
+                                EndNode = e.GraphObject as Node
+                            };
+                            graphObjectEditor.Editing = true;
+                            infoSplit.Panel2Collapsed = false;
+                            selected = null;
+                        }
+                        else
+                        {
+                            selected = e.GraphObject as Node;
+                        }
                     }
                     else
                     {
@@ -140,49 +126,17 @@ namespace GPS
                     }
                     break;
                 case 3:
-                    GraphObject graphObject = objectClicked(e);
-                    if (graphObject != null)
+                    if (e.GraphObject != null)
                     {
-                        infoSplit.Panel2Collapsed = false; 
-                        graphObjectEditor.GraphObject = graphObject;
-                    } else
+                        infoSplit.Panel2Collapsed = false;
+                        graphObjectEditor.GraphObject = e.GraphObject;
+                    }
+                    else
                     {
                         infoSplit.Panel2Collapsed = true;
                     }
                     break;
             }
-        }
-
-        private Node clicked(MouseEventArgs e)
-        {
-            foreach (Node node in db.Nodes)
-            {
-                if (e.X >= node.CoordinateX && e.X <= node.CoordinateX + 10)
-                {
-                    if (e.Y >= node.CoordinateY && e.Y <= node.CoordinateY + 10)
-                    {
-                        return node;
-                    }
-                }
-            }
-
-            return null;
-        }
-
-        private Models.GraphObject objectClicked(MouseEventArgs e)
-        {
-            foreach (GraphObject graphObject in db.GraphObjects.ToList())
-            {
-                Point location = graphObject.Location();
-                if (e.X >= location.X && e.X <= location.X + 10)
-                {
-                    if (e.Y >= location.Y && e.Y <= location.Y + 10)
-                    {
-                        return graphObject;
-                    }
-                }
-            }
-            return null;
         }
 
         private void graphObjectEditor_GraphObjectUpdated(object sender, 
@@ -195,5 +149,6 @@ namespace GPS
                 infoSplit.Panel2Collapsed = true;
             }
         }
+
     }
 }
