@@ -26,5 +26,8 @@ namespace GPS.GraphDisplay
 
         readonly Pen pathPen = new Pen(Brushes.Crimson, 2.0f);
         public Pen PathPen { get { return pathPen; } }
+
+        readonly Pen highlightPen = new Pen(Brushes.DarkOliveGreen, 2.0f);
+        public Pen HighlightPen { get { return highlightPen; } }
     }
 }

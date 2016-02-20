@@ -23,10 +23,10 @@ namespace GPS.GraphDisplay
         private IDictionary<GraphObject, Pen> specialHighlight
             = new Dictionary<GraphObject, Pen>();
 
-        private GraphObject[] higlightedPath = null;
-
+        private GraphObject[] highlightedPath = null;
+        private GraphObject[] highlightedConstraints = null;
         public GPSContext DbContext;
-         
+
         public event EventHandler<GraphMouseEventArgs> GraphMouseClick;
 
         public PlanarGraphDrawer()
@@ -46,19 +46,18 @@ namespace GPS.GraphDisplay
 
         public void RemoveHighlight(GraphObject graphObject)
         {
-            if (graphObject != null && 
+            if (graphObject != null &&
                 specialHighlight.ContainsKey(graphObject))
             {
                 specialHighlight.Remove(graphObject);
                 Refresh();
             }
         }
-
-        public void HighlightPath(IEnumerable<GraphObject> path)
+        public void HighlightConstraints(HashSet<GraphObject> constraints)
         {
-            if (higlightedPath != null)
+            if (highlightedConstraints != null)
             {
-                foreach (var obj in higlightedPath)
+                foreach (var obj in highlightedConstraints)
                 {
                     if (specialHighlight.ContainsKey(obj))
                     {
@@ -66,10 +65,32 @@ namespace GPS.GraphDisplay
                     }
                 }
             }
-            higlightedPath = path != null ? path.ToArray() : null;
-            if (higlightedPath != null)
+            highlightedConstraints = constraints != null ? constraints.ToArray() : null;
+            if (highlightedConstraints != null)
             {
-                foreach (var obj in higlightedPath)
+                foreach (var obj in highlightedConstraints)
+                {
+                    specialHighlight[obj] = displayProps.HighlightPen;
+                }
+            }
+            Refresh();
+        }
+        public void HighlightPath(IEnumerable<GraphObject> path)
+        {
+            if (highlightedPath != null)
+            {
+                foreach (var obj in highlightedPath)
+                {
+                    if (specialHighlight.ContainsKey(obj))
+                    {
+                        specialHighlight.Remove(obj);
+                    }
+                }
+            }
+            highlightedPath = path != null ? path.ToArray() : null;
+            if (highlightedPath != null)
+            {
+                foreach (var obj in highlightedPath)
                 {
                     specialHighlight[obj] = displayProps.PathPen;
                 }
@@ -90,13 +111,13 @@ namespace GPS.GraphDisplay
         {
             base.OnMouseClick(e);
             var dbPoint = coordConverter.ToDbCoord(new Point(e.X, e.Y));
-            e = new MouseEventArgs(e.Button, e.Clicks, dbPoint.X, 
+            e = new MouseEventArgs(e.Button, e.Clicks, dbPoint.X,
                                    dbPoint.Y, e.Delta);
             OnGraphMouseClick(new GraphMouseEventArgs(
                 e, objectClicked(dbPoint)));
         }
 
-        
+
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);

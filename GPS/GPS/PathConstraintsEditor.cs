@@ -34,6 +34,15 @@ namespace GPS
             }
         }
 
+        public class HighlightFeaturesEventArgs : EventArgs
+        {
+            public HashSet<GraphObject> Constraints;
+            public HighlightFeaturesEventArgs(HashSet<GraphObject> constraints)
+            {
+                Constraints = constraints;
+            }
+        }
+
         public event EventHandler<PathFoundEvenArgs> PathFound;
         
         protected virtual void OnPathFound(PathFoundEvenArgs args)
@@ -56,6 +65,16 @@ namespace GPS
             }
         }
 
+        public event EventHandler<HighlightFeaturesEventArgs> Highlight;
+
+        protected virtual void OnHighlight(HighlightFeaturesEventArgs args)
+        {
+            var handler = Highlight;
+            if (handler != null)
+            {
+                handler(this, args);
+            }
+        }
         public Node StartNode
         {
             get { return startNode; }
@@ -107,6 +126,29 @@ namespace GPS
         private void closeButton_Click(object sender, EventArgs e)
         {
             OnClosed(EventArgs.Empty);
+        }
+
+        private void showFeaturesButton_Click(object sender, EventArgs e)
+        {
+            var constraints = from ListViewItem item in
+                               featureSelector.CheckedItems
+                           select (item.Tag as FeatureType);
+
+            HashSet<GraphObject> list = new HashSet<GraphObject>();
+            foreach (var item in DbContext.GraphObjects.ToList())
+            {
+                foreach (var item1 in item.Features)
+                {
+                    foreach (var item2 in constraints)
+                    {
+                        if (item1.FeatureTypeId == item2.Id)
+                        {
+                            list.Add(item);
+                        }
+                    }
+                }
+            } 
+            OnHighlight(new HighlightFeaturesEventArgs(list));
         }
     }
 }

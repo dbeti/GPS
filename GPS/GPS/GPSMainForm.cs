@@ -244,7 +244,15 @@ namespace GPS
         private void pathConstraintsEditor_Closed(object sender, EventArgs e)
         {
             graphContainer.HighlightPath(null);
+            graphContainer.HighlightConstraints(null);
             mainSplit.Panel1Collapsed = true;
+        }
+
+        private void pathConstraintsEditor_Highlight(
+            object sender,
+            PathConstraintsEditor.HighlightFeaturesEventArgs e)
+        {
+            graphContainer.HighlightConstraints(e.Constraints);
         }
     }
 }

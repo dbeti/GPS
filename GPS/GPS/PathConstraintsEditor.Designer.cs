@@ -29,16 +29,17 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.startNodeBox = new System.Windows.Forms.TextBox();
             this.endNodeBox = new System.Windows.Forms.TextBox();
+            this.startNodeBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.closeButton = new System.Windows.Forms.Button();
             this.findPathButton = new System.Windows.Forms.Button();
             this.featureSelector = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.closeButton = new System.Windows.Forms.Button();
+            this.showFeaturesButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -53,29 +54,28 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(170, 65);
+            this.panel1.Size = new System.Drawing.Size(184, 65);
             this.panel1.TabIndex = 0;
             // 
-            // label1
+            // endNodeBox
             // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.label1.Size = new System.Drawing.Size(170, 20);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Path Constraints";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.endNodeBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.endNodeBox.Location = new System.Drawing.Point(80, 35);
+            this.endNodeBox.Name = "endNodeBox";
+            this.endNodeBox.ReadOnly = true;
+            this.endNodeBox.Size = new System.Drawing.Size(94, 20);
+            this.endNodeBox.TabIndex = 3;
             // 
-            // label2
+            // startNodeBox
             // 
-            this.label2.Location = new System.Drawing.Point(10, 5);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 20);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Start Node";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.startNodeBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.startNodeBox.Location = new System.Drawing.Point(80, 5);
+            this.startNodeBox.Name = "startNodeBox";
+            this.startNodeBox.ReadOnly = true;
+            this.startNodeBox.Size = new System.Drawing.Size(94, 20);
+            this.startNodeBox.TabIndex = 2;
             // 
             // label3
             // 
@@ -86,43 +86,54 @@
             this.label3.Text = "End Node";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // startNodeBox
+            // label2
             // 
-            this.startNodeBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.startNodeBox.Location = new System.Drawing.Point(80, 5);
-            this.startNodeBox.Name = "startNodeBox";
-            this.startNodeBox.ReadOnly = true;
-            this.startNodeBox.Size = new System.Drawing.Size(80, 20);
-            this.startNodeBox.TabIndex = 2;
+            this.label2.Location = new System.Drawing.Point(10, 5);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(60, 20);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Start Node";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // endNodeBox
+            // label1
             // 
-            this.endNodeBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.endNodeBox.Location = new System.Drawing.Point(80, 35);
-            this.endNodeBox.Name = "endNodeBox";
-            this.endNodeBox.ReadOnly = true;
-            this.endNodeBox.Size = new System.Drawing.Size(80, 20);
-            this.endNodeBox.TabIndex = 3;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.label1.Size = new System.Drawing.Size(184, 20);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Path Constraints";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.showFeaturesButton);
             this.panel2.Controls.Add(this.closeButton);
             this.panel2.Controls.Add(this.findPathButton);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 260);
+            this.panel2.Location = new System.Drawing.Point(0, 281);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(170, 40);
+            this.panel2.Size = new System.Drawing.Size(184, 72);
             this.panel2.TabIndex = 2;
+            // 
+            // closeButton
+            // 
+            this.closeButton.Location = new System.Drawing.Point(13, 46);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(47, 23);
+            this.closeButton.TabIndex = 1;
+            this.closeButton.Text = "Close";
+            this.closeButton.UseVisualStyleBackColor = true;
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
             // findPathButton
             // 
-            this.findPathButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.findPathButton.Enabled = false;
-            this.findPathButton.Location = new System.Drawing.Point(90, 10);
+            this.findPathButton.Location = new System.Drawing.Point(119, 46);
             this.findPathButton.Name = "findPathButton";
-            this.findPathButton.Size = new System.Drawing.Size(70, 23);
+            this.findPathButton.Size = new System.Drawing.Size(47, 23);
             this.findPathButton.TabIndex = 0;
             this.findPathButton.Text = "Find Path";
             this.findPathButton.UseVisualStyleBackColor = true;
@@ -138,7 +149,7 @@
             this.columnHeader1});
             this.featureSelector.Location = new System.Drawing.Point(10, 95);
             this.featureSelector.Name = "featureSelector";
-            this.featureSelector.Size = new System.Drawing.Size(150, 160);
+            this.featureSelector.Size = new System.Drawing.Size(164, 180);
             this.featureSelector.TabIndex = 3;
             this.featureSelector.UseCompatibleStateImageBehavior = false;
             this.featureSelector.View = System.Windows.Forms.View.Details;
@@ -148,15 +159,15 @@
             this.columnHeader1.Text = "Feature Type";
             this.columnHeader1.Width = 146;
             // 
-            // closeButton
+            // showFeaturesButton
             // 
-            this.closeButton.Location = new System.Drawing.Point(10, 10);
-            this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(70, 23);
-            this.closeButton.TabIndex = 1;
-            this.closeButton.Text = "Close";
-            this.closeButton.UseVisualStyleBackColor = true;
-            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            this.showFeaturesButton.Location = new System.Drawing.Point(66, 46);
+            this.showFeaturesButton.Name = "showFeaturesButton";
+            this.showFeaturesButton.Size = new System.Drawing.Size(47, 23);
+            this.showFeaturesButton.TabIndex = 2;
+            this.showFeaturesButton.Text = "Show";
+            this.showFeaturesButton.UseVisualStyleBackColor = true;
+            this.showFeaturesButton.Click += new System.EventHandler(this.showFeaturesButton_Click);
             // 
             // PathConstraintsEditor
             // 
@@ -167,7 +178,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Name = "PathConstraintsEditor";
-            this.Size = new System.Drawing.Size(170, 300);
+            this.Size = new System.Drawing.Size(184, 353);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -188,5 +199,6 @@
         private System.Windows.Forms.ListView featureSelector;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.Button closeButton;
+        private System.Windows.Forms.Button showFeaturesButton;
     }
 }
