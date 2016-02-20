@@ -10,6 +10,7 @@ namespace GPS.GraphDisplay
     interface IGraphDisplayProperties
     {
         int NodeRadius { get; }
+        int ArcArrowSize { get; }
         Font LabelFont { get; }
         Brush LabelBrush { get; }
         Brush NodeBrush { get; }

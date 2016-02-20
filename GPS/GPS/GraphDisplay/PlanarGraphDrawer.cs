@@ -138,10 +138,11 @@ namespace GPS.GraphDisplay
         {
             foreach (var graphObject in DbContext.GraphObjects.ToList())
             {
+                var off = displayProps.NodeRadius / 2;
                 Point location = graphObject.Location();
-                if (p.X >= location.X - 5 && p.X <= location.X + 5)
+                if (p.X >= location.X - off && p.X <= location.X + off)
                 {
-                    if (p.Y >= location.Y - 5 && p.Y <= location.Y + 5)
+                    if (p.Y >= location.Y - off && p.Y <= location.Y + off)
                     {
                         return graphObject;
                     }

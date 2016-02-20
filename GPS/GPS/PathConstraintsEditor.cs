@@ -105,6 +105,7 @@ namespace GPS
             {
                 foreach (var featureType in DbContext.FeatureTypes)
                 {
+                    if (featureType.Features.Count == 0) continue;
                     var item = new ListViewItem(featureType.Name)
                     {
                         Tag = featureType
